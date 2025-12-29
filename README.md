@@ -17,16 +17,15 @@ It presents my skills, tools, certifications, education, and projects in a clean
   - 🏆 Certifications
   - 🎓 Education
   - 📞 Contact
-- 📥 Downloadable resume button
 - 🏅 Certifications with company names, issue dates, and direct view links
-- ⚡ Smooth hover animations (zoom-out effect) on all sections
-- 📱 Fully responsive design for all screen sizes
+- ⚡ Smooth hover animations
 
 ---
 
 ## 🛠️ Built With
 
 - 🌐 HTML5
-- 🎨 Tailwind CSS v3.4.1
+- 🎨 Tailwind CSS
+- 🟨 Javascript
 - 🧩 Lucide Icons
 - 🖥️ Devicon Icons
