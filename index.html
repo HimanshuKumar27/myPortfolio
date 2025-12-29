@@ -20,8 +20,11 @@
 
   <!-- Navbar -->
   <header class="fixed w-full z-50 bg-black/30 backdrop-blur-md">
-    <nav class="container mx-auto flex justify-center items-center py-4 px-6">
-      <ul class="flex space-x-6 text-lg">
+    <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+      <div class="text-xl font-bold text-pink-400"> HK </div>
+      
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-6 text-lg">
         <li><a href="#home" class="hover:text-pink-400">Home</a></li>
         <li><a href="#about" class="hover:text-pink-400">About</a></li>
         <li><a href="#skills" class="hover:text-pink-400">Skills</a></li>
@@ -31,7 +34,26 @@
         <li><a href="#education" class="hover:text-pink-400">Education</a></li>
         <li><a href="#contact" class="hover:text-pink-400">Contact</a></li>
       </ul>
+
+      <!-- Mobile Menu Button -->
+      <button id="menuBtn" class="md:hidden text-white focus:outline-none">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-black/90 backdrop-blur-md">
+      <ul class="flex flex-col space-y-4 px-6 py-6 text-lg">
+        <li><a href="#home" class="hover:text-pink-400 block">Home</a></li>
+        <li><a href="#about" class="hover:text-pink-400 block">About</a></li>
+        <li><a href="#skills" class="hover:text-pink-400 block">Skills</a></li>
+        <li><a href="#tools" class="hover:text-pink-400 block">Tools</a></li>
+        <li><a href="#projects" class="hover:text-pink-400 block">Projects</a></li>
+        <li><a href="#certifications" class="hover:text-pink-400 block">Certifications</a></li>
+        <li><a href="#education" class="hover:text-pink-400 block">Education</a></li>
+        <li><a href="#contact" class="hover:text-pink-400 block">Contact</a></li>
+      </ul>
+    </div>
   </header>
 
   <!-- Hero Section -->
@@ -40,10 +62,10 @@
       class="w-48 h-48 rounded-full border-4 border-pink-400 shadow-lg mb-6 object-cover transition-transform duration-300 hover:scale-105">
     <h2 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="text-pink-400">Himanshu Kumar</span></h2>
     <p class="text-lg md:text-xl max-w-2xl">Junior Front-End Developer || Focused On Modern Tech Skills</p>
-    <a href="assets/Himanshu_Kumar_Resume.pdf" download
+    <button id="viewResumeBtn"
       class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 mt-6 rounded-lg shadow-md transition transform hover:scale-105">
-      Download Resume
-    </a>
+      View Resume
+    </button>
   </section>
 
   <!-- About Section -->
@@ -51,7 +73,7 @@
     <h2 class="text-3xl font-bold mb-6 border-b-2 border-pink-400 inline-block">About Me</h2>
     <p class="text-lg leading-relaxed max-w-3xl mx-auto">
       An aspiring Front-End Developer passionate about building responsive and user-friendly websites. I focus on web
-      technologies like HTML, CSS, JavaScript, TailwindCSS, and other frameworks. I’ve also gained certifications in web
+      technologies like HTML, CSS, JavaScript, TailwindCSS, and other frameworks. I've also gained certifications in web
       development and modern tools. <br><br> I enjoy learning new technologies, and continuously improving my skills to
       grow as a developer. I'm eager to connect with other programmers and industry professionals to learn and
       grow in the field of web development.
@@ -297,9 +319,21 @@
     <p class="text-sm">&copy; 2025 Himanshu Kumar. All rights reserved.</p>
   </footer>
 
-  <script>
-    lucide.createIcons();
-  </script>
+  <!-- Resume Modal -->
+  <div id="resumeModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg w-full max-w-5xl h-[90vh] flex flex-col">
+      <!-- Modal Header -->
+          <button id="closeModal" class="text-gray-600 hover:text-gray-800 transition">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+      <!-- PDF Viewer -->
+      <div class="flex-1 overflow-hidden">
+        <iframe src="assets/Himanshu_Kumar_Resume.pdf" class="w-full h-full" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 
 </body>
 
