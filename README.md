@@ -1,6 +1,6 @@
 # 🌐 Himanshu Kumar – Portfolio
 
-This repository contains my **personal portfolio website**, built using **HTML** and **Tailwind CSS v3.4.1**.  
+This repository contains my **personal portfolio website**, built using **HTML**,**Tailwind CSS** and **Javascript**.  
 It presents my skills, tools, certifications, education, and projects in a clean, modern, and fully responsive layout.
 
 ---
