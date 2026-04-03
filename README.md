@@ -19,4 +19,3 @@ It presents my skills, tools, certifications, education, and projects in a clean
   - 📞 Contact
 - 🏅 Certifications with company names, issue dates, and direct view links
 - ⚡ Smooth hover animations
-- 
