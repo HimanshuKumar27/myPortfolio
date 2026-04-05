@@ -11,73 +11,109 @@
   <meta name="description" content="Himanshu Kumar - Front-End Developer Portfolio. Explore my skills, projects, and educational background.">
   <title>Himanshu Kumar | Portfolio</title>
   
+  <script src="https://cdn.tailwindcss.com/3.4.1"></script>
   <script>
     tailwind.config = {
       darkMode: 'class'
     }
   </script>
-  <script src="https://cdn.tailwindcss.com/3.4.1"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    @keyframes blob {
+      0% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+    .animate-blob { animation: blob 7s infinite; }
+    .animation-delay-2000 { animation-delay: 2s; }
+  </style>
+  <script>
+    // Prevent FOUC for dark mode and default to light mode
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  </script>
 </head>
 
-<body class="bg-gradient-to-br from-teal-50 via-white to-teal-100/50 text-teal-800 font-sans selection:bg-teal-200 selection:text-teal-900">
+<body class="bg-gradient-to-br from-teal-50 via-white to-teal-100/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-teal-800 dark:text-slate-200 font-sans selection:bg-teal-200 selection:text-teal-900 transition-colors duration-300">
 
   <!-- Navbar -->
-  <header class="fixed w-full z-50 bg-white/80 backdrop-blur-xl border-b border-teal-200/60">
+  <header class="fixed w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-teal-200/60 dark:border-teal-800/60 transition-colors duration-300">
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="absolute top-0 left-0 h-1 bg-teal-500 w-full transform origin-left scale-x-0 transition-transform duration-100"></div>
     <nav class="container mx-auto flex justify-between items-center py-4 px-6">
-      <div class="text-xl font-bold font-display tracking-tight text-teal-950 text-teal-600"> HK </div>
+      <div class="text-xl font-bold font-display tracking-tight text-teal-600 dark:text-teal-400"> HK </div>
 
       <!-- Desktop Menu -->
-      <ul class="hidden md:flex space-x-6 text-lg">
-        <li><a href="#home" class="hover:text-teal-600">Home</a></li>
-        <li><a href="#about" class="hover:text-teal-600">About</a></li>
-        <li><a href="#skills" class="hover:text-teal-600">Skills</a></li>
-        <li><a href="#tools" class="hover:text-teal-600">Tools</a></li>
-        <li><a href="#projects" class="hover:text-teal-600">Projects</a></li>
-        <li><a href="#certifications" class="hover:text-teal-600">Certifications</a></li>
-        <li><a href="#education" class="hover:text-teal-600">Education</a></li>
-        <li><a href="#contact" class="hover:text-teal-600">Contact</a></li>
+      <ul class="hidden md:flex space-x-6 text-lg nav-links">
+        <li><a href="#home" class="hover:text-teal-600 dark:hover:text-teal-400">Home</a></li>
+        <li><a href="#about" class="hover:text-teal-600 dark:hover:text-teal-400">About</a></li>
+        <li><a href="#skills" class="hover:text-teal-600 dark:hover:text-teal-400">Skills</a></li>
+        <li><a href="#tools" class="hover:text-teal-600 dark:hover:text-teal-400">Tools</a></li>
+        <li><a href="#projects" class="hover:text-teal-600 dark:hover:text-teal-400">Projects</a></li>
+        <li><a href="#certifications" class="hover:text-teal-600 dark:hover:text-teal-400">Certifications</a></li>
+        <li><a href="#education" class="hover:text-teal-600 dark:hover:text-teal-400">Education</a></li>
+        <li><a href="#contact" class="hover:text-teal-600 dark:hover:text-teal-400">Contact</a></li>
       </ul>
 
-      <!-- Mobile Menu Button -->
-      <button id="menuBtn" class="md:hidden text-teal-950 focus:outline-none">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-      </button>
+      <!-- Actions -->
+      <div class="flex items-center space-x-4">
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggle" class="text-teal-950 dark:text-teal-50 hover:text-teal-600 dark:hover:text-teal-400 focus:outline-none transition">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+        </button>
+        <!-- Mobile Menu Button -->
+        <button id="menuBtn" class="md:hidden text-teal-950 dark:text-teal-50 focus:outline-none">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-b border-teal-200/60">
-      <ul class="flex flex-col space-y-4 px-6 py-6 text-lg">
-        <li><a href="#home" class="hover:text-teal-600 block">Home</a></li>
-        <li><a href="#about" class="hover:text-teal-600 block">About</a></li>
-        <li><a href="#skills" class="hover:text-teal-600 block">Skills</a></li>
-        <li><a href="#tools" class="hover:text-teal-600 block">Tools</a></li>
-        <li><a href="#projects" class="hover:text-teal-600 block">Projects</a></li>
-        <li><a href="#certifications" class="hover:text-teal-600 block">Certifications</a></li>
-        <li><a href="#education" class="hover:text-teal-600 block">Education</a></li>
-        <li><a href="#contact" class="hover:text-teal-600 block">Contact</a></li>
+    <div id="mobileMenu" class="hidden md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-teal-200/60 dark:border-teal-800/60">
+      <ul class="flex flex-col space-y-4 px-6 py-6 text-lg nav-links">
+        <li><a href="#home" class="hover:text-teal-600 dark:hover:text-teal-400 block">Home</a></li>
+        <li><a href="#about" class="hover:text-teal-600 dark:hover:text-teal-400 block">About</a></li>
+        <li><a href="#skills" class="hover:text-teal-600 dark:hover:text-teal-400 block">Skills</a></li>
+        <li><a href="#tools" class="hover:text-teal-600 dark:hover:text-teal-400 block">Tools</a></li>
+        <li><a href="#projects" class="hover:text-teal-600 dark:hover:text-teal-400 block">Projects</a></li>
+        <li><a href="#certifications" class="hover:text-teal-600 dark:hover:text-teal-400 block">Certifications</a></li>
+        <li><a href="#education" class="hover:text-teal-600 dark:hover:text-teal-400 block">Education</a></li>
+        <li><a href="#contact" class="hover:text-teal-600 dark:hover:text-teal-400 block">Contact</a></li>
       </ul>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-    <img src="assets/profile_image.png" alt="Himanshu Kumar"
-      class="w-48 h-48 rounded-full border-2 border-teal-300 shadow-xl shadow-teal-900/10 mb-6 object-cover transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-900/20">
-    <h1 class="text-5xl md:text-7xl font-bold font-display tracking-tight text-teal-950 mb-4">Hi, I'm <span class="text-teal-600 ">Himanshu Kumar</span></h1>
-    <p class="text-lg md:text-xl max-w-2xl">Front-End Developer || Focused On Modern Tech Skills</p>
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
+    <!-- Animated Blobs -->
+    <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob dark:bg-teal-700 dark:opacity-20 dark:mix-blend-screen hidden md:block"></div>
+    <div class="absolute top-1/4 right-1/4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000 dark:bg-teal-900 dark:opacity-20 dark:mix-blend-screen hidden md:block"></div>
+    
+    <img src="assets/profile_image.png" alt="Himanshu Kumar" loading="lazy"
+      class="reveal w-48 h-48 z-10 rounded-full border-2 border-teal-300 dark:border-teal-600 shadow-xl shadow-teal-900/10 mb-6 object-cover transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-900/20 relative">
+    <h1 class="reveal text-5xl md:text-7xl font-bold font-display tracking-tight text-teal-950 dark:text-slate-100 mb-4 relative z-10"><span class="typed-text"></span></h1>
+    <p class="reveal text-lg md:text-xl max-w-2xl dark:text-slate-300 relative z-10">Front-End Developer || Focused On Modern Tech Skills</p>
     <button id="viewResumeBtn"
-      class="bg-gradient-to-r from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-semibold shadow-lg shadow-teal-900/20 hover:shadow-teal-900/30 border border-teal-600/50 px-6 py-3 mt-6 rounded-lg shadow-md transition transform hover:scale-105">
+      class="reveal relative z-10 bg-gradient-to-r from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-semibold shadow-lg shadow-teal-900/20 hover:shadow-teal-900/30 border border-teal-600/50 px-6 py-3 mt-6 rounded-lg transition transform hover:scale-105">
       View Resume
     </button>
   </section>
 
   <!-- About Section -->
   <section id="about" class="container mx-auto py-20 px-6 text-center">
-    <h2 class="text-4xl font-display font-bold tracking-tight text-teal-950 mb-6 border-b-2 border-teal-500 pb-2 inline-block">About Me</h2>
-    <p class="text-lg leading-relaxed max-w-3xl mx-auto">
-      An aspiring Front-End Developer passionate about building responsive and user-friendly websites. I focus on web
+    <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">About Me</h2>
+    <p class="reveal text-lg leading-relaxed max-w-3xl mx-auto dark:text-slate-300">
+      A Front-End Developer passionate about building responsive and user-friendly websites. I focus on web
       technologies like HTML, CSS, JavaScript, TailwindCSS, and other frameworks. I've also gained certifications in web
       development and modern tools. <br><br> I enjoy learning new technologies, and continuously improving my skills to
       grow as a developer. I'm eager to connect with other programmers and industry professionals to learn and
@@ -87,33 +123,33 @@
 
   <!-- Skills Section -->
   <section id="skills" class="container mx-auto py-20 px-6 text-center">
-    <h2 class="text-4xl font-display font-bold tracking-tight text-teal-950 mb-6 border-b-2 border-teal-500 pb-2 inline-block">Skills</h2>
+    <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Skills</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-windows8-original colored text-5xl"></i>
         <span class="mt-2">Microsoft Office</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-html5-plain colored text-5xl"></i>
         <span class="mt-2">HTML</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-css3-plain colored text-5xl"></i>
         <span class="mt-2">CSS</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-sass-original colored text-5xl"></i>
         <span class="mt-2">Sass</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-tailwindcss-plain colored text-5xl"></i>
         <span class="mt-2">TailwindCSS</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-bootstrap-plain colored text-5xl"></i>
         <span class="mt-2">Bootstrap</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-javascript-plain colored text-5xl"></i>
         <span class="mt-2">JavaScript</span>
       </div>
@@ -122,33 +158,33 @@
 
   <!-- Tools and Technology Section -->
   <section id="tools" class="container mx-auto py-20 px-6 text-center">
-    <h2 class="text-4xl font-display font-bold tracking-tight text-teal-950 mb-6 border-b-2 border-teal-500 pb-2 inline-block">Tools & Technology</h2>
+    <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Tools & Technology</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-git-plain colored text-5xl"></i>
         <span class="mt-2">Git</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-github-original colored text-5xl"></i>
         <span class="mt-2">GitHub</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvinjxr8MVZ69diNIbNNMfcUljy04dIjkqPQ&s" class="w-12 h-12 rounded-lg object-cover shadow-sm border border-teal-200/30" alt="Antigravity Logo" loading="lazy" />
         <span class="mt-2">Antigravity</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <img src="https://cdn.simpleicons.org/netlify" class="w-12 h-12" alt="Netlify" loading="lazy" />
         <span class="mt-2">Netlify</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <img src="https://cdn.simpleicons.org/vercel" class="w-12 h-12" alt="Vercel" loading="lazy" />
         <span class="mt-2">Vercel</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-firebase-plain colored text-5xl"></i>
         <span class="mt-2">Firebase</span>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <img src="https://cdn.simpleicons.org/supabase" class="w-12 h-12" alt="Supabase" loading="lazy" />
         <span class="mt-2">Supabase</span>
       </div>
@@ -157,83 +193,83 @@
 
   <!-- Projects Section -->
   <section id="projects" class="container mx-auto py-20 px-6 text-center">
-    <h2 class="text-4xl font-display font-bold tracking-tight text-teal-950 mb-6 text-center border-b-2 border-teal-500 pb-2 inline-block">Projects</h2>
+    <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Projects</h2>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">Flip Profile Card</h3>
-        <p class="text-teal-800/90 mb-4">A modern flip profile card built using HTML and Tailwind CSS, featuring a smooth
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern flip profile card built using HTML and Tailwind CSS, featuring a smooth
           3D flip animation on hover.
           This card displays personal details on the front and contact/social links on the back.</p>
         <a href="https://himanshukumar27.github.io/Flip-Profile-Card/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">Hotel Booking System</h3>
-        <p class="text-teal-800/90 mb-4"> (Work in progress...) </p>
-        <a href="#available-soon" class="text-teal-600 hover:underline">View Project →</a>
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4"> (Work in progress...) </p>
+        <a href="#available-soon" class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">NexusAI - Landing Page</h3>
-        <p class="text-teal-800/90 mb-4"> Modern AI productivity platform landing page with full responsive design.
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4"> Modern AI productivity platform landing page with full responsive design.
           It highlights product features, testimonials, pricing plans, and calls-to-action using a clean UI and smooth
           user experience. </p>
         <a href="https://himanshukumar27.github.io/NexusAI-Landing-page/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">Google Homepage Clone</h3>
-        <p class="text-teal-800/90 mb-4"> A pixel-perfect clone of the Google homepage built with HTML, CSS and SVG Icons.
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A pixel-perfect clone of the Google homepage built with HTML, CSS and SVG Icons.
           This project recreates Google's clean, minimalist design with full responsive support across all devices.
         </p>
         <a href="https://himanshukumar27.github.io/Google-Homepage-Clone/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">Job Application Form</h3>
-        <p class="text-teal-800/90 mb-4"> A modern and responsive Job Application Form built using HTML, CSS, and
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A modern and responsive Job Application Form built using HTML, CSS, and
           JavaScript. This project demonstrates form design, client-side validation, and a smooth user experience. </p>
         <a href="https://himanshukumar27.github.io/Job-Application-Form/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">TechByte - Blog Page</h3>
-        <p class="text-teal-800/90 mb-4"> TechByte is a modern and responsive technology blog page designed to showcase the
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4"> TechByte is a modern and responsive technology blog page designed to showcase the
           latest articles, news, and insights from the world of tech. It features a clean layout, smooth hover effects,
           and a professional reading experience. </p>
         <a href="https://himanshukumar27.github.io/TechByte-Blog-Page/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">Modern Image Gallery</h3>
-        <p class="text-teal-800/90 mb-4"> A beautiful, responsive image gallery that displays random high-quality images
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A beautiful, responsive image gallery that displays random high-quality images
           from Pexels API. Features smooth animations, hover effects, and a mobile-first design approach. </p>
         <a href="https://himanshukumar27.github.io/Modern-Image-Gallery/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">Bella Vista Restaurant</h3>
-        <p class="text-teal-800/90 mb-4"> A modern, fully responsive restaurant website built with Bootstrap 5. Perfect for
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A modern, fully responsive restaurant website built with Bootstrap 5. Perfect for
           showcasing your menu, accepting reservations, and engaging with customers. </p>
         <a href="https://himanshukumar27.github.io/Bella-Vista-Restaurant/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">AnimeVerse</h3>
-        <p class="text-teal-800/90 mb-4">A modern, responsive anime showcase webpage featuring official poster images and
+        <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern, responsive anime showcase webpage featuring official poster images and
           basic details of popular anime series. Built with clean HTML, CSS animations, and vanilla JavaScript. </p>
         <a href="https://himanshukumar27.github.io/AnimeVerse/" target="_blank"
-          class="text-teal-600 hover:underline">View Project →</a>
+          class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
     </div>
   </section>
 
   <!-- Certifications Section -->
   <section id="certifications" class="container mx-auto py-20 px-6 text-center">
-    <h2 class="text-4xl font-display font-bold tracking-tight text-teal-950 mb-6 border-b-2 border-teal-500 pb-2 inline-block">Certifications</h2>
+    <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Certifications</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
 
       <!-- Front-end Web Development (Reliance Foundation) -->
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">Front-end Web Development</h3>
@@ -241,8 +277,8 @@
         <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">
           Reliance Foundation Skilling Academy (Skill India Digital Hub)
         </span>
-        <p class="text-sm text-teal-600/80 italic">Issued 18 October, 2025 </p>
-        <p class="text-teal-800/90 text-sm mt-2">
+        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 18 October, 2025 </p>
+        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">
           Completed an intensive front-end development program covering HTML, CSS, JavaScript, and modern web
           development fundamentals through Skill India Digital Hub.
         </p>
@@ -253,14 +289,14 @@
       </div>
 
       <!-- HTML, CSS & JavaScript (Udemy) -->
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">HTML, CSS & JavaScript - Certification Course for Beginners</h3>
         </div>
         <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">Udemy</span>
-        <p class="text-sm text-teal-600/80 italic">Issued 2 November, 2024</p>
-        <p class="text-teal-800/90 text-sm mt-2">Learned core front-end technologies and built interactive web pages with
+        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 2 November, 2024</p>
+        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Learned core front-end technologies and built interactive web pages with
           modern styling and DOM manipulation.</p>
         <a href="https://www.udemy.com/certificate/UC-a74c4489-8892-4ef9-b242-ead0b09030a8/" target="_blank"
           class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
@@ -268,14 +304,14 @@
       </div>
 
       <!-- ChatGPT Mastery (Udemy) -->
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">ChatGPT Mastery: From Creative Writing to Coding Solutions</h3>
         </div>
         <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">Udemy</span>
-        <p class="text-sm text-teal-600/80 italic">Issued 19 December 2024</p>
-        <p class="text-teal-800/90 text-sm mt-2">Explored practical applications of ChatGPT for programming, writing,
+        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 19 December 2024</p>
+        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Explored practical applications of ChatGPT for programming, writing,
           automation, and productivity workflows.</p>
         <a href="https://www.udemy.com/certificate/UC-14954d9a-9b8f-4e02-bbab-2ff5b2637c88/" target="_blank"
           class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
@@ -283,14 +319,14 @@
       </div>
 
       <!-- Tailwind CSS (Udemy) -->
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">TailwindCSS from A to Z: Master TailwindCSS Quickly</h3>
         </div>
         <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">Udemy</span>
-        <p class="text-sm text-teal-600/80 italic">Issued 12 March, 2025</p>
-        <p class="text-teal-800/90 text-sm mt-2">Learned TailwindCSS utility-first framework to build modern, responsive,
+        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 12 March, 2025</p>
+        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Learned TailwindCSS utility-first framework to build modern, responsive,
           and professional websites.</p>
         <a href="https://www.udemy.com/certificate/UC-42a1c7dc-707d-4398-9269-17793c95d426/" target="_blank"
           class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
@@ -298,15 +334,15 @@
       </div>
 
       <!-- FreeCodeCamp -->
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">Legacy Responsive Web Design V8</h3>
         </div>
         <span
           class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">freeCodeCamp</span>
-        <p class="text-sm text-teal-600/80 italic">Issued 27 July, 2025</p>
-        <p class="text-teal-800/90 text-sm mt-2">Built responsive websites using HTML5, CSS3, and modern design principles,
+        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 27 July, 2025</p>
+        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Built responsive websites using HTML5, CSS3, and modern design principles,
           covering accessibility and mobile-first layouts.</p>
         <a href="https://www.freecodecamp.org/certification/himanshukumar27/responsive-web-design" target="_blank"
           class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
@@ -317,74 +353,74 @@
 
   <!-- Education Section -->
   <section id="education" class="container mx-auto py-20 px-6 text-center">
-    <h2 class="text-4xl font-display font-bold tracking-tight text-teal-950 mb-6 text-center border-b-2 border-teal-500 pb-2 inline-block">Education</h2>
+    <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Education</h2>
     <div class="space-y-6">
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Diploma in Computer Science and Engineering</h3>
-          <p class="text-teal-600">Noida International University (2023 - 2026)</p>
+          <p class="text-teal-600 dark:text-teal-400">Noida International University (2023 - 2026)</p>
         </div>
-        <p class="italic">Greater Noida, Uttar Pradesh</p>
+        <p class="italic dark:text-slate-400">Greater Noida, Uttar Pradesh</p>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">'O' Level, Information Technology</h3>
-          <p class="text-teal-600">NIELIT - National Institute of Electronics & Information Technology (2022 - 2023)</p>
+          <p class="text-teal-600 dark:text-teal-400">NIELIT - National Institute of Electronics & Information Technology (2022 - 2023)</p>
         </div>
-        <p class="italic">Prayagraj, Uttar Pradesh</p>
+        <p class="italic dark:text-slate-400">Prayagraj, Uttar Pradesh</p>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Bachelor of Arts (English & History)</h3>
-          <p class="text-teal-600">Mahatma Gandhi Kashi Vidyapith (2019 - 2022)</p>
+          <p class="text-teal-600 dark:text-teal-400">Mahatma Gandhi Kashi Vidyapith (2019 - 2022)</p>
         </div>
-        <p class="italic">Varanasi, Uttar Pradesh</p>
+        <p class="italic dark:text-slate-400">Varanasi, Uttar Pradesh</p>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Intermediate (Science with Maths)</h3>
-          <p class="text-teal-600">Happy Model School (2017 - 2019)</p>
+          <p class="text-teal-600 dark:text-teal-400">Happy Model School (2017 - 2019)</p>
         </div>
-        <p class="italic">Ghaziabad, Uttar Pradesh</p>
+        <p class="italic dark:text-slate-400">Ghaziabad, Uttar Pradesh</p>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">High School</h3>
-          <p class="text-teal-600">New Sainik Public School (2017)</p>
+          <p class="text-teal-600 dark:text-teal-400">New Sainik Public School (2017)</p>
         </div>
-        <p class="italic">Ghaziabad, Uttar Pradesh</p>
+        <p class="italic dark:text-slate-400">Ghaziabad, Uttar Pradesh</p>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="container mx-auto py-20 px-6 text-center">
-    <h2 class="text-4xl font-display font-bold tracking-tight text-teal-950 mb-6 border-b-2 border-teal-500 pb-2 inline-block">Get in Touch</h2>
+    <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Get in Touch</h2>
     <p class="mb-8 text-lg">Feel free to connect with me through the following:</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/gmail" class="w-6 h-6" alt="Gmail" loading="lazy" />
         <a href="mailto:365himanshukumar@gmail.com" class="hover:underline">365himanshukumar@gmail.com</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
         <img src="https://api.iconify.design/logos:linkedin-icon.svg" class="w-6 h-6" alt="LinkedIn" loading="lazy" />
         <a href="https://www.linkedin.com/in/himanshu-kumar-27z" target="_blank"
           class="hover:underline">himanshu-kumar-27z</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/whatsapp" class="w-6 h-6" alt="WhatsApp" loading="lazy" />
         <a href="tel:+9170XXX21740" class="hover:underline">+91-70XXX21740</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/github" class="w-6 h-6" alt="GitHub" loading="lazy" />
         <a href="https://github.com/HimanshuKumar27" target="_blank" class="hover:underline">HimanshuKumar27</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/instagram" class="w-6 h-6" alt="Instagram" loading="lazy" />
         <a href="https://www.instagram.com/great_himanshu_27/" target="_blank"
           class="hover:underline">great_himanshu_27</a>
       </div>
-      <div class="bg-white/90 backdrop-blur-md border border-teal-100 shadow-xl shadow-teal-900/5 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/20 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
         <i data-lucide="mail" class="w-6 h-6 text-[#0078D4]" alt="Outlook"></i>
         <a href="mailto:greathimanshu@outlook.com" class="hover:underline">greathimanshu@outlook.com</a>
       </div>
@@ -392,15 +428,15 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-teal-50/50 border-t border-teal-200/50 py-6 text-center mt-12">
-    <p class="text-sm">&copy; 2026 Himanshu Kumar. All rights reserved.</p>
+  <footer class="bg-teal-50/50 dark:bg-slate-900 border-t border-teal-200/50 dark:border-teal-800/60 py-6 text-center mt-12 transition-colors duration-300">
+    <p class="text-sm dark:text-slate-400">&copy; 2026 Himanshu Kumar. All rights reserved.</p>
   </footer>
 
   <!-- Resume Modal -->
-  <div id="resumeModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg w-full max-w-5xl h-[90vh] flex flex-col">
+  <div id="resumeModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+    <div id="modalContent" class="bg-white dark:bg-slate-800 rounded-lg w-full max-w-5xl h-[90vh] flex flex-col transform scale-95 transition-all duration-300">
       <!-- Modal Header -->
-      <button id="closeModal" class="text-gray-600 hover:text-gray-800 transition">
+      <button id="closeModal" class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition p-2 m-2 self-end">
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
       <!-- PDF Viewer -->
