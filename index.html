@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/profile_image.png">
   <meta name="description" content="Himanshu Kumar - Front-End Developer Portfolio. Explore my skills, projects, and educational background.">
   <title>Himanshu Kumar | Portfolio</title>
   
@@ -99,8 +100,8 @@
     <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob dark:bg-teal-700 dark:opacity-20 dark:mix-blend-screen hidden md:block"></div>
     <div class="absolute top-1/4 right-1/4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000 dark:bg-teal-900 dark:opacity-20 dark:mix-blend-screen hidden md:block"></div>
     
-    <img src="assets/profile_image.png" alt="Himanshu Kumar" loading="lazy"
-      class="reveal w-48 h-48 z-10 rounded-full border-2 border-teal-300 dark:border-teal-600 shadow-xl shadow-teal-900/10 mb-6 object-cover transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-900/20 relative">
+    <img src="assets/profile_image.png" alt="Himanshu Kumar" fetchpriority="high" decoding="async"
+      class="reveal w-40 h-40 sm:w-48 sm:h-48 z-10 rounded-full border-2 border-teal-300 dark:border-teal-600 shadow-xl shadow-teal-900/10 mb-6 object-cover transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-900/20 relative">
     <h1 class="reveal text-5xl md:text-7xl font-bold font-display tracking-tight text-teal-950 dark:text-slate-100 mb-4 relative z-10"><span class="typed-text"></span></h1>
     <p class="reveal text-lg md:text-xl max-w-2xl dark:text-slate-300 relative z-10">Front-End Developer || Focused On Modern Tech Skills</p>
     <button id="viewResumeBtn"
@@ -161,10 +162,6 @@
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Tools & Technology</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
       <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
-        <i class="devicon-git-plain colored text-5xl"></i>
-        <span class="mt-2">Git</span>
-      </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
         <i class="devicon-github-original colored text-5xl"></i>
         <span class="mt-2">GitHub</span>
       </div>
@@ -194,7 +191,7 @@
   <!-- Projects Section -->
   <section id="projects" class="container mx-auto py-20 px-6 text-center">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Projects</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
         <h3 class="text-xl font-semibold mb-2">Flip Profile Card</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern flip profile card built using HTML and Tailwind CSS, featuring a smooth
@@ -355,35 +352,35 @@
   <section id="education" class="container mx-auto py-20 px-6 text-center">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Education</h2>
     <div class="space-y-6">
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Diploma in Computer Science and Engineering</h3>
           <p class="text-teal-600 dark:text-teal-400">Noida International University (2023 - 2026)</p>
         </div>
         <p class="italic dark:text-slate-400">Greater Noida, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">'O' Level, Information Technology</h3>
           <p class="text-teal-600 dark:text-teal-400">NIELIT - National Institute of Electronics & Information Technology (2022 - 2023)</p>
         </div>
         <p class="italic dark:text-slate-400">Prayagraj, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Bachelor of Arts (English & History)</h3>
           <p class="text-teal-600 dark:text-teal-400">Mahatma Gandhi Kashi Vidyapith (2019 - 2022)</p>
         </div>
         <p class="italic dark:text-slate-400">Varanasi, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Intermediate (Science with Maths)</h3>
           <p class="text-teal-600 dark:text-teal-400">Happy Model School (2017 - 2019)</p>
         </div>
         <p class="italic dark:text-slate-400">Ghaziabad, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-3/4 mx-auto text-center">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">High School</h3>
           <p class="text-teal-600 dark:text-teal-400">New Sainik Public School (2017)</p>
@@ -398,31 +395,31 @@
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Get in Touch</h2>
     <p class="mb-8 text-lg">Feel free to connect with me through the following:</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/gmail" class="w-6 h-6" alt="Gmail" loading="lazy" />
         <a href="mailto:365himanshukumar@gmail.com" class="hover:underline">365himanshukumar@gmail.com</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
-        <img src="https://api.iconify.design/logos:linkedin-icon.svg" class="w-6 h-6" alt="LinkedIn" loading="lazy" />
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-[#0A66C2]"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         <a href="https://www.linkedin.com/in/himanshu-kumar-27z" target="_blank"
           class="hover:underline">himanshu-kumar-27z</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/whatsapp" class="w-6 h-6" alt="WhatsApp" loading="lazy" />
-        <a href="tel:+9170XXX21740" class="hover:underline">+91-70XXX21740</a>
+        <a href="tel:+917011121740" class="hover:underline">+91-7011121740</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/github" class="w-6 h-6" alt="GitHub" loading="lazy" />
         <a href="https://github.com/HimanshuKumar27" target="_blank" class="hover:underline">HimanshuKumar27</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
         <img src="https://cdn.simpleicons.org/instagram" class="w-6 h-6" alt="Instagram" loading="lazy" />
         <a href="https://www.instagram.com/great_himanshu_27/" target="_blank"
           class="hover:underline">great_himanshu_27</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 p-4 flex items-center space-x-3">
+      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
         <i data-lucide="mail" class="w-6 h-6 text-[#0078D4]" alt="Outlook"></i>
-        <a href="mailto:greathimanshu@outlook.com" class="hover:underline">greathimanshu@outlook.com</a>
+        <a href="mailto:greathimanshu@outlook.com" class="hover:underline">greathimanshu27@outlook.com</a>
       </div>
     </div>
   </section>
