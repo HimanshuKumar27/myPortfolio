@@ -70,6 +70,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
 
+  // --- Navbar Logo: HK ↔ Profile Pic on scroll ---
+  const navLogo = document.getElementById('navLogo');
+  const homeSection = document.getElementById('home');
+
+  if (navLogo && homeSection) {
+    const logoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLogo.classList.remove('scrolled');
+        } else {
+          navLogo.classList.add('scrolled');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    logoObserver.observe(homeSection);
+  }
+
   // --- Scroll Reveal Animations ---
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries, observer) => {
