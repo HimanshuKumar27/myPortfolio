@@ -5,25 +5,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/profile_image.png">
   <meta name="description" content="Himanshu Kumar - Front-End Developer Portfolio. Explore my skills, projects, and educational background.">
   <title>Himanshu Kumar | Portfolio</title>
-  
-  <script src="https://cdn.tailwindcss.com/3.4.1"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class'
-    }
-  </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <!-- Preconnect & DNS Prefetch for critical origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.simpleicons.org">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+
+  <!-- Preload LCP image -->
+  <link rel="preload" as="image" href="assets/profile_image.webp" type="image/webp">
+
+  <!-- Google Fonts (render-blocking but small with preconnect) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Critical inline CSS — renders hero BEFORE Tailwind loads -->
   <style>
+    /* ===== Critical CSS: ensures instant first paint ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(to bottom right, #f0fdfa, #ffffff, rgba(204,251,241,0.5));
+      color: #115e59;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    html.dark body {
+      background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a);
+      color: #e2e8f0;
+    }
+
+    /* Selection */
+    ::selection { background: #99f6e4; color: #134e4a; }
+
+    /* Font display classes */
+    .font-display { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
+
+    /* ===== Navbar (above the fold) ===== */
+    .header-fixed {
+      position: fixed; width: 100%; z-index: 50;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(153,246,228,0.6);
+      transition: background-color 0.3s;
+    }
+    html.dark .header-fixed {
+      background: rgba(15,23,42,0.8);
+      border-bottom-color: rgba(20,94,82,0.6);
+    }
+
+    /* ===== Scroll progress ===== */
+    #scrollProgress {
+      position: absolute; top: 0; left: 0;
+      height: 4px; background: #14b8a6;
+      width: 100%; transform-origin: left;
+      transform: scaleX(0); transition: transform 0.1s;
+    }
+
+    /* ===== Hero (above the fold) ===== */
+    .hero-section {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 1.5rem; position: relative; overflow: hidden;
+    }
+
+    /* ===== Reveal animation ===== */
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
     .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* ===== Blob animation ===== */
     @keyframes blob {
       0% { transform: translate(0px, 0px) scale(1); }
       33% { transform: translate(30px, -50px) scale(1.1); }
@@ -32,9 +88,68 @@
     }
     .animate-blob { animation: blob 7s infinite; }
     .animation-delay-2000 { animation-delay: 2s; }
+
+    /* ===== Consolidated card component (replaces 25+ repeated class strings) ===== */
+    .card {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(204,251,241,1);
+      box-shadow: 0 20px 25px -5px rgba(15,63,56,0.05);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card:hover {
+      border-color: #5eead4;
+      box-shadow: 0 25px 50px -12px rgba(15,63,56,0.2);
+      transform: translateY(-0.5rem) scale(1.02);
+    }
+    html.dark .card {
+      background: rgba(30,41,59,0.9);
+      border-color: rgba(20,94,82,0.5);
+      box-shadow: none;
+    }
+    html.dark .card:hover {
+      border-color: #14b8a6;
+      box-shadow: 0 25px 50px -12px rgba(15,63,56,0.4);
+    }
+
+    /* ===== Content-visibility for offscreen sections ===== */
+    .section-lazy {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 500px;
+    }
+
+    /* ===== Profile image placeholder (prevents CLS) ===== */
+    .profile-img {
+      width: 12rem; height: 12rem;
+      border-radius: 50%;
+      border: 2px solid #5eead4;
+      box-shadow: 0 20px 25px -5px rgba(15,63,56,0.1);
+      object-fit: cover;
+      transition: transform 0.5s, box-shadow 0.5s;
+    }
+    .profile-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 25px 50px -12px rgba(15,63,56,0.2);
+    }
+    html.dark .profile-img { border-color: #0d9488; }
+
+    @media (min-width: 640px) {
+      .profile-img { width: 12rem; height: 12rem; }
+    }
+
+    /* ===== Resume modal ===== */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+      z-index: 50; display: flex; align-items: center;
+      justify-content: center; padding: 1rem;
+      transition: opacity 0.3s;
+    }
   </style>
+
+  <!-- Prevent FOUC: apply dark mode before paint -->
   <script>
-    // Prevent FOUC for dark mode and default to light mode
     if (localStorage.getItem('theme') === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -47,9 +162,9 @@
 <body class="bg-gradient-to-br from-teal-50 via-white to-teal-100/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-teal-800 dark:text-slate-200 font-sans selection:bg-teal-200 selection:text-teal-900 transition-colors duration-300">
 
   <!-- Navbar -->
-  <header class="fixed w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-teal-200/60 dark:border-teal-800/60 transition-colors duration-300">
+  <header class="header-fixed">
     <!-- Scroll Progress Bar -->
-    <div id="scrollProgress" class="absolute top-0 left-0 h-1 bg-teal-500 w-full transform origin-left scale-x-0 transition-transform duration-100"></div>
+    <div id="scrollProgress"></div>
     <nav class="container mx-auto flex justify-between items-center py-4 px-6">
       <div class="text-xl font-bold font-display tracking-tight text-teal-600 dark:text-teal-400"> HK </div>
 
@@ -95,13 +210,15 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
+  <section id="home" class="hero-section">
     <!-- Animated Blobs -->
     <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob dark:bg-teal-700 dark:opacity-20 dark:mix-blend-screen hidden md:block"></div>
     <div class="absolute top-1/4 right-1/4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000 dark:bg-teal-900 dark:opacity-20 dark:mix-blend-screen hidden md:block"></div>
-    
-    <img src="assets/profile_image.png" alt="Himanshu Kumar" fetchpriority="high" decoding="async"
-      class="reveal w-40 h-40 sm:w-48 sm:h-48 z-10 rounded-full border-2 border-teal-300 dark:border-teal-600 shadow-xl shadow-teal-900/10 mb-6 object-cover transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-900/20 relative">
+
+    <!-- Profile image: optimized WebP, explicit dimensions prevent CLS -->
+    <img src="assets/profile_image.webp" alt="Himanshu Kumar"
+      width="192" height="192" fetchpriority="high" decoding="async"
+      class="reveal relative z-10 mb-6 profile-img">
     <h1 class="reveal text-5xl md:text-7xl font-bold font-display tracking-tight text-teal-950 dark:text-slate-100 mb-4 relative z-10"><span class="typed-text"></span></h1>
     <p class="reveal text-lg md:text-xl max-w-2xl dark:text-slate-300 relative z-10">Front-End Developer || Focused On Modern Tech Skills</p>
     <button id="viewResumeBtn"
@@ -111,7 +228,7 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="container mx-auto py-20 px-6 text-center">
+  <section id="about" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">About Me</h2>
     <p class="reveal text-lg leading-relaxed max-w-3xl mx-auto dark:text-slate-300">
       A Front-End Developer passionate about building responsive and user-friendly websites. I focus on web
@@ -123,34 +240,34 @@
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="container mx-auto py-20 px-6 text-center">
+  <section id="skills" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Skills</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-windows8-original colored text-5xl"></i>
         <span class="mt-2">Microsoft Office</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-html5-plain colored text-5xl"></i>
         <span class="mt-2">HTML</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-css3-plain colored text-5xl"></i>
         <span class="mt-2">CSS</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-sass-original colored text-5xl"></i>
         <span class="mt-2">Sass</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-tailwindcss-plain colored text-5xl"></i>
         <span class="mt-2">TailwindCSS</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-bootstrap-plain colored text-5xl"></i>
         <span class="mt-2">Bootstrap</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-javascript-plain colored text-5xl"></i>
         <span class="mt-2">JavaScript</span>
       </div>
@@ -158,41 +275,41 @@
   </section>
 
   <!-- Tools and Technology Section -->
-  <section id="tools" class="container mx-auto py-20 px-6 text-center">
+  <section id="tools" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Tools & Technology</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-github-original colored text-5xl"></i>
         <span class="mt-2">GitHub</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvinjxr8MVZ69diNIbNNMfcUljy04dIjkqPQ&s" class="w-12 h-12 rounded-lg object-cover shadow-sm border border-teal-200/30" alt="Antigravity Logo" loading="lazy" />
+      <div class="reveal card flex flex-col items-center">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvinjxr8MVZ69diNIbNNMfcUljy04dIjkqPQ&s" class="w-12 h-12 rounded-lg object-cover shadow-sm border border-teal-200/30" alt="Antigravity Logo" loading="lazy" width="48" height="48" />
         <span class="mt-2">Antigravity</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
-        <img src="https://cdn.simpleicons.org/netlify" class="w-12 h-12" alt="Netlify" loading="lazy" />
+      <div class="reveal card flex flex-col items-center">
+        <img src="https://cdn.simpleicons.org/netlify" class="w-12 h-12" alt="Netlify" loading="lazy" width="48" height="48" />
         <span class="mt-2">Netlify</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
-        <img src="https://cdn.simpleicons.org/vercel" class="w-12 h-12" alt="Vercel" loading="lazy" />
+      <div class="reveal card flex flex-col items-center">
+        <img src="https://cdn.simpleicons.org/vercel" class="w-12 h-12" alt="Vercel" loading="lazy" width="48" height="48" />
         <span class="mt-2">Vercel</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
+      <div class="reveal card flex flex-col items-center">
         <i class="devicon-firebase-plain colored text-5xl"></i>
         <span class="mt-2">Firebase</span>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 flex flex-col items-center">
-        <img src="https://cdn.simpleicons.org/supabase" class="w-12 h-12" alt="Supabase" loading="lazy" />
+      <div class="reveal card flex flex-col items-center">
+        <img src="https://cdn.simpleicons.org/supabase" class="w-12 h-12" alt="Supabase" loading="lazy" width="48" height="48" />
         <span class="mt-2">Supabase</span>
       </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="container mx-auto py-20 px-6 text-center">
+  <section id="projects" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Projects</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">Flip Profile Card</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern flip profile card built using HTML and Tailwind CSS, featuring a smooth
           3D flip animation on hover.
@@ -200,12 +317,12 @@
         <a href="https://himanshukumar27.github.io/Flip-Profile-Card/" target="_blank"
           class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">Hotel Booking System</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4"> (Work in progress...) </p>
         <a href="#available-soon" class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">NexusAI - Landing Page</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4"> Modern AI productivity platform landing page with full responsive design.
           It highlights product features, testimonials, pricing plans, and calls-to-action using a clean UI and smooth
@@ -213,7 +330,7 @@
         <a href="https://himanshukumar27.github.io/NexusAI-Landing-page/" target="_blank"
           class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">Google Homepage Clone</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A pixel-perfect clone of the Google homepage built with HTML, CSS and SVG Icons.
           This project recreates Google's clean, minimalist design with full responsive support across all devices.
@@ -221,14 +338,14 @@
         <a href="https://himanshukumar27.github.io/Google-Homepage-Clone/" target="_blank"
           class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">Job Application Form</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A modern and responsive Job Application Form built using HTML, CSS, and
           JavaScript. This project demonstrates form design, client-side validation, and a smooth user experience. </p>
         <a href="https://himanshukumar27.github.io/Job-Application-Form/" target="_blank"
           class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">TechByte - Blog Page</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4"> TechByte is a modern and responsive technology blog page designed to showcase the
           latest articles, news, and insights from the world of tech. It features a clean layout, smooth hover effects,
@@ -236,21 +353,21 @@
         <a href="https://himanshukumar27.github.io/TechByte-Blog-Page/" target="_blank"
           class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">Modern Image Gallery</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A beautiful, responsive image gallery that displays random high-quality images
           from Pexels API. Features smooth animations, hover effects, and a mobile-first design approach. </p>
         <a href="https://himanshukumar27.github.io/Modern-Image-Gallery/" target="_blank"
           class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">Bella Vista Restaurant</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4"> A modern, fully responsive restaurant website built with Bootstrap 5. Perfect for
           showcasing your menu, accepting reservations, and engaging with customers. </p>
         <a href="https://himanshukumar27.github.io/Bella-Vista-Restaurant/" target="_blank"
           class="text-teal-600 dark:text-teal-400 hover:underline">View Project →</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6">
+      <div class="reveal card">
         <h3 class="text-xl font-semibold mb-2">AnimeVerse</h3>
         <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern, responsive anime showcase webpage featuring official poster images and
           basic details of popular anime series. Built with clean HTML, CSS animations, and vanilla JavaScript. </p>
@@ -261,12 +378,12 @@
   </section>
 
   <!-- Certifications Section -->
-  <section id="certifications" class="container mx-auto py-20 px-6 text-center">
+  <section id="certifications" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Certifications</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
 
       <!-- Front-end Web Development (Reliance Foundation) -->
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal card text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">Front-end Web Development</h3>
@@ -286,7 +403,7 @@
       </div>
 
       <!-- HTML, CSS & JavaScript (Udemy) -->
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal card text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">HTML, CSS & JavaScript - Certification Course for Beginners</h3>
@@ -301,7 +418,7 @@
       </div>
 
       <!-- ChatGPT Mastery (Udemy) -->
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal card text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">ChatGPT Mastery: From Creative Writing to Coding Solutions</h3>
@@ -316,7 +433,7 @@
       </div>
 
       <!-- Tailwind CSS (Udemy) -->
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal card text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">TailwindCSS from A to Z: Master TailwindCSS Quickly</h3>
@@ -331,7 +448,7 @@
       </div>
 
       <!-- FreeCodeCamp -->
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 text-left">
+      <div class="reveal card text-left">
         <div class="flex items-center mb-2 space-x-2">
           <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
           <h3 class="text-xl font-semibold">Legacy Responsive Web Design V8</h3>
@@ -349,38 +466,38 @@
   </section>
 
   <!-- Education Section -->
-  <section id="education" class="container mx-auto py-20 px-6 text-center">
+  <section id="education" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Education</h2>
     <div class="space-y-6">
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
+      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Diploma in Computer Science and Engineering</h3>
           <p class="text-teal-600 dark:text-teal-400">Noida International University (2023 - 2026)</p>
         </div>
         <p class="italic dark:text-slate-400">Greater Noida, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
+      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">'O' Level, Information Technology</h3>
           <p class="text-teal-600 dark:text-teal-400">NIELIT - National Institute of Electronics & Information Technology (2022 - 2023)</p>
         </div>
         <p class="italic dark:text-slate-400">Prayagraj, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
+      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Bachelor of Arts (English & History)</h3>
           <p class="text-teal-600 dark:text-teal-400">Mahatma Gandhi Kashi Vidyapith (2019 - 2022)</p>
         </div>
         <p class="italic dark:text-slate-400">Varanasi, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
+      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">Intermediate (Science with Maths)</h3>
           <p class="text-teal-600 dark:text-teal-400">Happy Model School (2017 - 2019)</p>
         </div>
         <p class="italic dark:text-slate-400">Ghaziabad, Uttar Pradesh</p>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-6 w-full md:w-3/4 mx-auto text-center">
+      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
         <div>
           <h3 class="text-xl font-semibold">High School</h3>
           <p class="text-teal-600 dark:text-teal-400">New Sainik Public School (2017)</p>
@@ -391,33 +508,33 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="container mx-auto py-20 px-6 text-center">
+  <section id="contact" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2 class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">Get in Touch</h2>
     <p class="mb-8 text-lg">Feel free to connect with me through the following:</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
-        <img src="https://cdn.simpleicons.org/gmail" class="w-6 h-6" alt="Gmail" loading="lazy" />
+      <div class="reveal card flex items-center space-x-3">
+        <img src="https://cdn.simpleicons.org/gmail" class="w-6 h-6" alt="Gmail" loading="lazy" width="24" height="24" />
         <a href="mailto:365himanshukumar@gmail.com" class="hover:underline">365himanshukumar@gmail.com</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
+      <div class="reveal card flex items-center space-x-3">
         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-[#0A66C2]"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         <a href="https://www.linkedin.com/in/himanshu-kumar-27z" target="_blank"
           class="hover:underline">himanshu-kumar-27z</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
-        <img src="https://cdn.simpleicons.org/whatsapp" class="w-6 h-6" alt="WhatsApp" loading="lazy" />
+      <div class="reveal card flex items-center space-x-3">
+        <img src="https://cdn.simpleicons.org/whatsapp" class="w-6 h-6" alt="WhatsApp" loading="lazy" width="24" height="24" />
         <a href="tel:+917011121740" class="hover:underline">+91-7011121740</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
-        <img src="https://cdn.simpleicons.org/github" class="w-6 h-6" alt="GitHub" loading="lazy" />
+      <div class="reveal card flex items-center space-x-3">
+        <img src="https://cdn.simpleicons.org/github" class="w-6 h-6" alt="GitHub" loading="lazy" width="24" height="24" />
         <a href="https://github.com/HimanshuKumar27" target="_blank" class="hover:underline">HimanshuKumar27</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
-        <img src="https://cdn.simpleicons.org/instagram" class="w-6 h-6" alt="Instagram" loading="lazy" />
+      <div class="reveal card flex items-center space-x-3">
+        <img src="https://cdn.simpleicons.org/instagram" class="w-6 h-6" alt="Instagram" loading="lazy" width="24" height="24" />
         <a href="https://www.instagram.com/great_himanshu_27/" target="_blank"
           class="hover:underline">great_himanshu_27</a>
       </div>
-      <div class="reveal bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-teal-100 dark:border-teal-800/50 shadow-xl shadow-teal-900/5 dark:shadow-none hover:border-teal-300 dark:hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-900/20 dark:hover:shadow-teal-900/40 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-xl p-4 md:p-6 flex items-center space-x-3">
+      <div class="reveal card flex items-center space-x-3">
         <i data-lucide="mail" class="w-6 h-6 text-[#0078D4]" alt="Outlook"></i>
         <a href="mailto:greathimanshu@outlook.com" class="hover:underline">greathimanshu27@outlook.com</a>
       </div>
@@ -429,21 +546,44 @@
     <p class="text-sm dark:text-slate-400">&copy; 2026 Himanshu Kumar. All rights reserved.</p>
   </footer>
 
-  <!-- Resume Modal -->
-  <div id="resumeModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+  <!-- Resume Modal (iframe lazy-loaded via JS) -->
+  <div id="resumeModal" class="hidden modal-overlay opacity-0">
     <div id="modalContent" class="bg-white dark:bg-slate-800 rounded-lg w-full max-w-5xl h-[90vh] flex flex-col transform scale-95 transition-all duration-300">
       <!-- Modal Header -->
       <button id="closeModal" class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition p-2 m-2 self-end">
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
-      <!-- PDF Viewer -->
+      <!-- PDF Viewer: src set by JS on open for lazy loading -->
       <div class="flex-1 overflow-hidden">
-        <iframe src="assets/Himanshu_Kumar_Resume.pdf" class="w-full h-full" frameborder="0"></iframe>
+        <iframe id="resumeIframe" data-src="assets/Himanshu_Kumar_Resume.pdf" class="w-full h-full" frameborder="0"></iframe>
       </div>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- ===== DEFERRED SCRIPTS (non-render-blocking) ===== -->
+  <!-- Tailwind CSS CDN — deferred so it doesn't block first paint -->
+  <script src="https://cdn.tailwindcss.com/3.4.1" defer></script>
+  <script>
+    // Tailwind config must run after Tailwind loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.tailwind) {
+        tailwind.config = { darkMode: 'class' };
+      }
+    });
+  </script>
+
+  <!-- Lucide icons — deferred -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- Devicon CSS — loaded non-blocking -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"></noscript>
+
+  <!-- Typed.js — deferred -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js" defer></script>
+
+  <!-- Main script — deferred, runs after all libs -->
+  <script src="script.js" defer></script>
 
 </body>
 
