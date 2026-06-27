@@ -9,268 +9,24 @@
     content="Himanshu Kumar - Front-End Developer Portfolio. Explore my skills, projects, and educational background.">
   <title>Himanshu Kumar | Portfolio</title>
 
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.ico">
+
   <!-- Preconnect & DNS Prefetch for critical origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.simpleicons.org">
   <link rel="dns-prefetch" href="https://unpkg.com">
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
   <!-- Preload LCP image -->
   <link rel="preload" as="image" href="assets/profile_image.webp" type="image/webp">
 
-  <!-- Google Fonts (render-blocking but small with preconnect) -->
+  <!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
     rel="stylesheet">
-
-  <!-- Critical inline CSS — renders hero BEFORE Tailwind loads -->
-  <style>
-    /* ===== Critical CSS: ensures instant first paint ===== */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(to bottom right, #f0fdfa, #ffffff, rgba(204, 251, 241, 0.5));
-      color: #115e59;
-      -webkit-font-smoothing: antialiased;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    html.dark body {
-      background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a);
-      color: #e2e8f0;
-    }
-
-    /* Selection */
-    ::selection {
-      background: #99f6e4;
-      color: #134e4a;
-    }
-
-    /* Font display classes */
-    .font-display {
-      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-    }
-
-    /* ===== Navbar (above the fold) ===== */
-    .header-fixed {
-      position: fixed;
-      width: 100%;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(153, 246, 228, 0.6);
-      transition: background-color 0.3s;
-    }
-
-    html.dark .header-fixed {
-      background: rgba(15, 23, 42, 0.8);
-      border-bottom-color: rgba(20, 94, 82, 0.6);
-    }
-
-    /* ===== Scroll progress ===== */
-    #scrollProgress {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: #14b8a6;
-      width: 100%;
-      transform-origin: left;
-      transform: scaleX(0);
-      transition: transform 0.1s;
-    }
-
-    /* ===== Hero (above the fold) ===== */
-    .hero-section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* ===== Reveal animation ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease-out;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ===== Blob animation ===== */
-    @keyframes blob {
-      0% {
-        transform: translate(0px, 0px) scale(1);
-      }
-
-      33% {
-        transform: translate(30px, -50px) scale(1.1);
-      }
-
-      66% {
-        transform: translate(-20px, 20px) scale(0.9);
-      }
-
-      100% {
-        transform: translate(0px, 0px) scale(1);
-      }
-    }
-
-    .animate-blob {
-      animation: blob 7s infinite;
-    }
-
-    .animation-delay-2000 {
-      animation-delay: 2s;
-    }
-
-    /* ===== Consolidated card component (replaces 25+ repeated class strings) ===== */
-    .card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(204, 251, 241, 1);
-      box-shadow: 0 20px 25px -5px rgba(15, 63, 56, 0.05);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .card:hover {
-      border-color: #5eead4;
-      box-shadow: 0 25px 50px -12px rgba(15, 63, 56, 0.2);
-      transform: translateY(-0.5rem) scale(1.02);
-    }
-
-    html.dark .card {
-      background: rgba(30, 41, 59, 0.9);
-      border-color: rgba(20, 94, 82, 0.5);
-      box-shadow: none;
-    }
-
-    html.dark .card:hover {
-      border-color: #14b8a6;
-      box-shadow: 0 25px 50px -12px rgba(15, 63, 56, 0.4);
-    }
-
-    /* ===== Content-visibility for offscreen sections ===== */
-    .section-lazy {
-      content-visibility: auto;
-      contain-intrinsic-size: 0 500px;
-    }
-
-    /* ===== Profile image placeholder (prevents CLS) ===== */
-    .profile-img {
-      width: 12rem;
-      height: 12rem;
-      border-radius: 50%;
-      border: 2px solid #5eead4;
-      box-shadow: 0 20px 25px -5px rgba(15, 63, 56, 0.1);
-      object-fit: cover;
-      transition: transform 0.5s, box-shadow 0.5s;
-    }
-
-    .profile-img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 25px 50px -12px rgba(15, 63, 56, 0.2);
-    }
-
-    html.dark .profile-img {
-      border-color: #0d9488;
-    }
-
-    @media (min-width: 640px) {
-      .profile-img {
-        width: 12rem;
-        height: 12rem;
-      }
-    }
-
-    /* ===== Navbar logo crossfade ===== */
-    .nav-logo {
-      position: relative;
-      width: 2.25rem;
-      height: 2.25rem;
-    }
-
-    .nav-logo-text,
-    .nav-logo-img {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .nav-logo-text {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .nav-logo-img {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-
-    .nav-logo.scrolled .nav-logo-text {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-
-    .nav-logo.scrolled .nav-logo-img {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .nav-logo-img img {
-      width: 2.25rem;
-      height: 2.25rem;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #5eead4;
-      box-shadow: 0 2px 8px rgba(15, 63, 56, 0.15);
-    }
-
-    html.dark .nav-logo-img img {
-      border-color: #0d9488;
-    }
-
-    /* ===== Resume modal ===== */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      transition: opacity 0.3s;
-    }
-  </style>
 
   <!-- Prevent FOUC: apply dark mode before paint -->
   <script>
@@ -386,35 +142,8 @@
     <h2
       class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Skills</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-windows8-original colored text-5xl"></i>
-        <span class="mt-2">Microsoft Office</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-html5-plain colored text-5xl"></i>
-        <span class="mt-2">HTML</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-css3-plain colored text-5xl"></i>
-        <span class="mt-2">CSS</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-sass-original colored text-5xl"></i>
-        <span class="mt-2">Sass</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-tailwindcss-plain colored text-5xl"></i>
-        <span class="mt-2">TailwindCSS</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-bootstrap-plain colored text-5xl"></i>
-        <span class="mt-2">Bootstrap</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-javascript-plain colored text-5xl"></i>
-        <span class="mt-2">JavaScript</span>
-      </div>
+    <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
+      <!-- Dynamically Rendered by src/components/Skills.js -->
     </div>
   </section>
 
@@ -423,41 +152,8 @@
     <h2
       class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Tools & Technology</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-github-original colored text-5xl"></i>
-        <span class="mt-2">GitHub</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvinjxr8MVZ69diNIbNNMfcUljy04dIjkqPQ&s"
-          class="w-12 h-12 rounded-lg object-cover shadow-sm border border-teal-200/30" alt="Antigravity Logo"
-          loading="lazy" width="48" height="48" />
-        <span class="mt-2">Antigravity</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <img src="https://cdn.simpleicons.org/netlify" class="w-12 h-12" alt="Netlify" loading="lazy" width="48"
-          height="48" />
-        <span class="mt-2">Netlify</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <img src="https://cdn.simpleicons.org/vercel" class="w-12 h-12" alt="Vercel" loading="lazy" width="48"
-          height="48" />
-        <span class="mt-2">Vercel</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <i class="devicon-firebase-plain colored text-5xl"></i>
-        <span class="mt-2">Firebase</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <img src="https://cdn.simpleicons.org/supabase" class="w-12 h-12" alt="Supabase" loading="lazy" width="48"
-          height="48" />
-        <span class="mt-2">Supabase</span>
-      </div>
-      <div class="reveal card flex flex-col items-center">
-        <img src="https://cdn.simpleicons.org/claude" class="w-12 h-12" alt="Claude" loading="lazy" width="48"
-          height="48" />
-        <span class="mt-2">Claude</span>
-      </div>
+    <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
+      <!-- Dynamically Rendered by src/components/Tools.js -->
     </div>
   </section>
 
@@ -466,118 +162,8 @@
     <h2
       class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="reveal card flex flex-col justify-between text-left">
-        <div>
-          <h3 class="text-xl font-semibold mb-2 text-center md:text-left">BigQuery Release Notes Hub</h3>
-          <p class="text-teal-800/90 dark:text-slate-300 mb-4">A premium web application built with Python Flask and Vanilla Web Technologies. It pulls the latest Google BigQuery release notes from the official RSS/Atom feed, parses combined daily updates into granular individual cards, and features a built-in X/Twitter Composer to preview, edit, and share updates securely.</p>
-        </div>
-        <div class="flex items-center justify-between mt-auto border-t border-teal-100/50 dark:border-teal-800/30 pt-4">
-          <a href="https://bq-release-notes-hub.onrender.com/" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-          </a>
-          <a href="https://github.com/HimanshuKumar27/bq-release-notes-hub" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="github" class="w-4 h-4"></i> View on GitHub
-          </a>
-        </div>
-      </div>
-      <div class="reveal card flex flex-col justify-between text-left">
-        <div>
-          <h3 class="text-xl font-semibold mb-2 text-center md:text-left">Ambient Expense-Approval Agent</h3>
-          <p class="text-teal-800/90 dark:text-slate-300 mb-4">An ambient, event-driven expense parser, auditor, and approval router built on Google ADK 2.0 and Python FastAPI. It features automatic PII redaction, prompt injection defense, automated policy audits, and a Human-in-the-Loop approval system.</p>
-        </div>
-        <div class="flex items-center justify-between mt-auto border-t border-teal-100/50 dark:border-teal-800/30 pt-4">
-          <span class="text-teal-600/40 dark:text-slate-500/40 font-medium inline-flex items-center gap-1.5 cursor-not-allowed select-none" title="Live demo not available for this project">
-            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-          </span>
-          <a href="https://github.com/HimanshuKumar27/ambient-expense-agent" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="github" class="w-4 h-4"></i> View on GitHub
-          </a>
-        </div>
-      </div>
-      <!-- <div class="reveal card flex flex-col justify-between text-left">
-        <div>
-          <h3 class="text-xl font-semibold mb-2 text-center md:text-left">Flip Profile Card</h3>
-          <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern flip profile card built using HTML and Tailwind CSS, featuring a smooth 3D flip animation on hover. This card displays personal details on the front and contact/social links on the back.</p>
-        </div>
-        <div class="flex items-center justify-between mt-auto border-t border-teal-100/50 dark:border-teal-800/30 pt-4">
-          <a href="https://himanshukumar27.github.io/Flip-Profile-Card/" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-          </a>
-          <a href="https://github.com/HimanshuKumar27/Flip-Profile-Card" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="github" class="w-4 h-4"></i> View on GitHub
-          </a>
-        </div>
-      </div> -->
-      <div class="reveal card flex flex-col justify-between text-left">
-        <div>
-          <h3 class="text-xl font-semibold mb-2 text-center md:text-left">BookMyRoom - Hotel Booking System</h3>
-          <p class="text-teal-800/90 dark:text-slate-300 mb-4">A full-stack hotel booking web application for discovering and booking budget to premium hotel rooms across India. Built with vanilla HTML/CSS/JS, Tailwind CSS, Supabase, and deployed on Netlify.</p>
-        </div>
-        <div class="flex items-center justify-between mt-auto border-t border-teal-100/50 dark:border-teal-800/30 pt-4">
-          <a href="https://bookmyroomonline.netlify.app/" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-          </a>
-          <a href="https://github.com/HimanshuKumar27/BookMyRoom" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="github" class="w-4 h-4"></i> View on GitHub
-          </a>
-        </div>
-      </div>
-      <div class="reveal card flex flex-col justify-between text-left">
-        <div>
-          <h3 class="text-xl font-semibold mb-2 text-center md:text-left">Job Application Form</h3>
-          <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern and responsive Job Application Form built using HTML, CSS, and JavaScript. This project demonstrates form design, client-side validation, and a smooth user experience.</p>
-        </div>
-        <div class="flex items-center justify-between mt-auto border-t border-teal-100/50 dark:border-teal-800/30 pt-4">
-          <a href="https://himanshukumar27.github.io/Job-Application-Form/" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-          </a>
-          <a href="https://github.com/HimanshuKumar27/Job-Application-Form" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="github" class="w-4 h-4"></i> View on GitHub
-          </a>
-        </div>
-      </div>
-      <div class="reveal card flex flex-col justify-between text-left">
-        <div>
-          <h3 class="text-xl font-semibold mb-2 text-center md:text-left">Modern Image Gallery</h3>
-          <p class="text-teal-800/90 dark:text-slate-300 mb-4">A beautiful, responsive image gallery that displays random high-quality images from Pexels API. Features smooth animations, hover effects, and a mobile-first design approach.</p>
-        </div>
-        <div class="flex items-center justify-between mt-auto border-t border-teal-100/50 dark:border-teal-800/30 pt-4">
-          <a href="https://himanshukumar27.github.io/Modern-Image-Gallery/" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-          </a>
-          <a href="https://github.com/HimanshuKumar27/Modern-Image-Gallery" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="github" class="w-4 h-4"></i> View on GitHub
-          </a>
-        </div>
-      </div>
-      <div class="reveal card flex flex-col justify-between text-left">
-        <div>
-          <h3 class="text-xl font-semibold mb-2 text-center md:text-left">My-Anime-Watch-List</h3>
-          <p class="text-teal-800/90 dark:text-slate-300 mb-4">A modern, responsive anime showcase webpage featuring a curated personal collection of anime series. It displays official poster images, ratings (MAL & IMDb), and basic details. Built with clean HTML, Tailwind CSS, custom CSS animations, and vanilla JavaScript.</p>
-        </div>
-        <div class="flex items-center justify-between mt-auto border-t border-teal-100/50 dark:border-teal-800/30 pt-4">
-          <a href="https://himanshukumar27.github.io/My-Anime-Watch-List/" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-          </a>
-          <a href="https://github.com/HimanshuKumar27/My-Anime-Watch-List" target="_blank"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-200 font-medium inline-flex items-center gap-1.5 transition">
-            <i data-lucide="github" class="w-4 h-4"></i> View on GitHub
-          </a>
-        </div>
-      </div>
+    <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Dynamically Rendered by src/components/Projects.js -->
     </div>
   </section>
 
@@ -586,92 +172,8 @@
     <h2
       class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Certifications</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
-
-      <!-- Front-end Web Development (Reliance Foundation) -->
-      <div class="reveal card text-left">
-        <div class="flex items-center mb-2 space-x-2">
-          <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
-          <h3 class="text-xl font-semibold">Front-end Web Development</h3>
-        </div>
-        <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">
-          Reliance Foundation Skilling Academy (Skill India Digital Hub)
-        </span>
-        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 18 October, 2025 </p>
-        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">
-          Completed an intensive front-end development program covering HTML, CSS, JavaScript, and modern web
-          development fundamentals through Skill India Digital Hub.
-        </p>
-        <a href="https://rfskillingacademy.com/certificate/group/330/297227" target="_blank"
-          class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">
-          View Certificate
-        </a>
-      </div>
-
-      <!-- HTML, CSS & JavaScript (Udemy) -->
-      <div class="reveal card text-left">
-        <div class="flex items-center mb-2 space-x-2">
-          <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
-          <h3 class="text-xl font-semibold">HTML, CSS & JavaScript - Certification Course for Beginners</h3>
-        </div>
-        <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">Udemy</span>
-        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 2 November, 2024</p>
-        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Learned core front-end technologies and built
-          interactive web pages with
-          modern styling and DOM manipulation.</p>
-        <a href="https://www.udemy.com/certificate/UC-a74c4489-8892-4ef9-b242-ead0b09030a8/" target="_blank"
-          class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
-          Certificate</a>
-      </div>
-
-      <!-- ChatGPT Mastery (Udemy) -->
-      <div class="reveal card text-left">
-        <div class="flex items-center mb-2 space-x-2">
-          <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
-          <h3 class="text-xl font-semibold">ChatGPT Mastery: From Creative Writing to Coding Solutions</h3>
-        </div>
-        <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">Udemy</span>
-        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 19 December 2024</p>
-        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Explored practical applications of ChatGPT for
-          programming, writing,
-          automation, and productivity workflows.</p>
-        <a href="https://www.udemy.com/certificate/UC-14954d9a-9b8f-4e02-bbab-2ff5b2637c88/" target="_blank"
-          class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
-          Certificate</a>
-      </div>
-
-      <!-- Tailwind CSS (Udemy) -->
-      <div class="reveal card text-left">
-        <div class="flex items-center mb-2 space-x-2">
-          <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
-          <h3 class="text-xl font-semibold">TailwindCSS from A to Z: Master TailwindCSS Quickly</h3>
-        </div>
-        <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">Udemy</span>
-        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 12 March, 2025</p>
-        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Learned TailwindCSS utility-first framework to
-          build modern, responsive,
-          and professional websites.</p>
-        <a href="https://www.udemy.com/certificate/UC-42a1c7dc-707d-4398-9269-17793c95d426/" target="_blank"
-          class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
-          Certificate</a>
-      </div>
-
-      <!-- FreeCodeCamp -->
-      <div class="reveal card text-left">
-        <div class="flex items-center mb-2 space-x-2">
-          <i data-lucide="award" class="w-5 h-5 text-teal-600"></i>
-          <h3 class="text-xl font-semibold">Legacy Responsive Web Design V8</h3>
-        </div>
-        <span
-          class="inline-block bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">freeCodeCamp</span>
-        <p class="text-sm text-teal-600/80 dark:text-teal-400/80 italic">Issued 27 July, 2025</p>
-        <p class="text-teal-800/90 dark:text-slate-300 text-sm mt-2">Built responsive websites using HTML5, CSS3, and
-          modern design principles,
-          covering accessibility and mobile-first layouts.</p>
-        <a href="https://www.freecodecamp.org/certification/himanshukumar27/responsive-web-design" target="_blank"
-          class="inline-block mt-4 bg-teal-500 hover:bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">View
-          Certificate</a>
-      </div>
+    <div id="certifications-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
+      <!-- Dynamically Rendered by src/components/Certifications.js -->
     </div>
   </section>
 
@@ -680,43 +182,8 @@
     <h2
       class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Education</h2>
-    <div class="space-y-6">
-      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
-        <div>
-          <h3 class="text-xl font-semibold">Diploma in Computer Science and Engineering</h3>
-          <p class="text-teal-600 dark:text-teal-400">Noida International University (2023 - 2026)</p>
-        </div>
-        <p class="italic dark:text-slate-400">Greater Noida, Uttar Pradesh</p>
-      </div>
-      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
-        <div>
-          <h3 class="text-xl font-semibold">'O' Level, Information Technology</h3>
-          <p class="text-teal-600 dark:text-teal-400">NIELIT - National Institute of Electronics & Information
-            Technology (2022 - 2023)</p>
-        </div>
-        <p class="italic dark:text-slate-400">Prayagraj, Uttar Pradesh</p>
-      </div>
-      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
-        <div>
-          <h3 class="text-xl font-semibold">Bachelor of Arts (English & History)</h3>
-          <p class="text-teal-600 dark:text-teal-400">Mahatma Gandhi Kashi Vidyapith (2019 - 2022)</p>
-        </div>
-        <p class="italic dark:text-slate-400">Varanasi, Uttar Pradesh</p>
-      </div>
-      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
-        <div>
-          <h3 class="text-xl font-semibold">Intermediate (Science with Maths)</h3>
-          <p class="text-teal-600 dark:text-teal-400">Happy Model School (2017 - 2019)</p>
-        </div>
-        <p class="italic dark:text-slate-400">Ghaziabad, Uttar Pradesh</p>
-      </div>
-      <div class="reveal card w-full md:w-3/4 mx-auto text-center">
-        <div>
-          <h3 class="text-xl font-semibold">High School</h3>
-          <p class="text-teal-600 dark:text-teal-400">New Sainik Public School (2017)</p>
-        </div>
-        <p class="italic dark:text-slate-400">Ghaziabad, Uttar Pradesh</p>
-      </div>
+    <div id="education-container" class="space-y-6">
+      <!-- Dynamically Rendered by src/components/Education.js -->
     </div>
   </section>
 
@@ -788,17 +255,6 @@
   </div>
 
   <!-- ===== DEFERRED SCRIPTS (non-render-blocking) ===== -->
-  <!-- Tailwind CSS CDN — deferred so it doesn't block first paint -->
-  <script src="https://cdn.tailwindcss.com/3.4.1" defer></script>
-  <script>
-    // Tailwind config must run after Tailwind loads
-    document.addEventListener('DOMContentLoaded', function () {
-      if (window.tailwind) {
-        tailwind.config = { darkMode: 'class' };
-      }
-    });
-  </script>
-
   <!-- Lucide icons — deferred -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
@@ -812,8 +268,8 @@
   <!-- Typed.js — deferred -->
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js" defer></script>
 
-  <!-- Main script — deferred, runs after all libs -->
-  <script src="script.js" defer></script>
+  <!-- Main app.js module entry point -->
+  <script type="module" src="src/app.js"></script>
 
 </body>
 

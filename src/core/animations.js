@@ -1,0 +1,62 @@
+export class AnimationManager {
+  constructor({ scrollProgressId, revealElementsSelector, navLogoId, homeSectionId }) {
+    this.scrollProgress = document.getElementById(scrollProgressId);
+    this.revealElementsSelector = revealElementsSelector;
+    this.navLogo = document.getElementById(navLogoId);
+    this.homeSection = document.getElementById(homeSectionId);
+    this.init();
+  }
+
+  init() {
+    this.initScrollProgress();
+    this.initScrollReveal();
+    this.initNavLogoFade();
+  }
+
+  initScrollProgress() {
+    if (!this.scrollProgress) return;
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercentage = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+      this.scrollProgress.style.transform = `scaleX(${scrollPercentage})`;
+    }, { passive: true });
+  }
+
+  initScrollReveal() {
+    const revealElements = document.querySelectorAll(this.revealElementsSelector);
+    if (revealElements.length === 0) return;
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target); // Save CPU resources by stopping observation
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+
+  initNavLogoFade() {
+    if (!this.navLogo || !this.homeSection) return;
+
+    const logoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.navLogo.classList.remove('scrolled');
+        } else {
+          this.navLogo.classList.add('scrolled');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    logoObserver.observe(this.homeSection);
+  }
+}
