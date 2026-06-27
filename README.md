@@ -12,7 +12,7 @@ The project is structured to enforce a strict separation of concerns, ensuring h
 Portfolio/
 ├── public/                           # Static assets served at the root (Favicons, images, PDF)
 │   ├── assets/
-│   │   ├── profile_image.png
+│   │   ├── profile_image.webp
 │   │   └── Himanshu_Kumar_Resume.pdf
 │   ├── favicon.ico
 │   └── favicon.svg
