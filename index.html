@@ -106,13 +106,8 @@
 
   <!-- Hero Section -->
   <section id="home" class="hero-section">
-    <!-- Animated Blobs -->
-    <div
-      class="absolute top-1/4 left-1/4 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob dark:bg-teal-700 dark:opacity-20 dark:mix-blend-screen hidden md:block">
-    </div>
-    <div
-      class="absolute top-1/4 right-1/4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000 dark:bg-teal-900 dark:opacity-20 dark:mix-blend-screen hidden md:block">
-    </div>
+    <!-- Three.js interactive 3D canvas — positioned absolute, pointer-events:none so content stays clickable -->
+    <canvas id="hero-3d-bg" class="hero-3d-canvas" aria-hidden="true"></canvas>
 
     <!-- Profile image: optimized WebP, explicit dimensions prevent CLS -->
     <img src="assets/profile_image.webp" alt="Himanshu Kumar" width="192" height="192" fetchpriority="high"
