@@ -25,17 +25,18 @@ Portfolio/
 │   │   ├── theme.js                  # Light/Dark mode controller
 │   │   ├── navigation.js             # Mobile menu & scroll spy
 │   │   ├── modal.js                  # ESC & lazy iframe PDF loader
-│   │   └── ...
+│   │   ├── animations.js             # Scroll reveal, spotlight hover & text scramble
+│   │   └── three-bg.js               # Three.js interactive 3D hero background
 │   ├── components/                   # UI Presentation Layer (Component renderers)
 │   │   ├── Projects.js
 │   │   ├── Skills.js
 │   │   └── ...
 │   ├── styles/                       # CSS Preprocessors
-│   │   └── main.css                  # Tailwinds & custom animations
+│   │   └── main.css                  # Tailwind & custom animations
 │   └── app.js                        # Bootstrapper entry point
 ├── index.html                        # Main layout skeleton
 ├── tailwind.config.js                # Tailwind preprocessor configuration
-└── vite.config.js                    # Vite bundler configuration
+└── vite.config.js                    # Vite bundler configuration (with Three.js code-split)
 ```
 
 ### Unidirectional Dependency Flow
@@ -57,6 +58,30 @@ The portfolio has been redesigned using premium design tokens and animations:
 * **Hardware-Accelerated Floating Blobs (`.bg-blob`)**: Fluid, slow-moving blurred background radial gradient shapes float slowly across the viewport (`@keyframes float-blob`) on a background layer, maintaining high FPS and keeping performance clean.
 
 ---
+
+## 🧊 Three.js Interactive 3D Background
+
+The hero section features a fully self-contained, interactive 3D scene powered by [Three.js](https://threejs.org/), rendered on a transparent WebGL canvas layered behind all page content.
+
+### Scene Composition
+* **900-Particle Starfield**: Teal/cyan/indigo coloured particles distributed across a spherical volume, each drifting with an independent sinusoidal animation for an organic, living starfield feel.
+* **Torus Knot** *(centrepiece)*: A `(2,3)` wireframe torus knot sculpture floats behind the profile image, slowly auto-rotating on two axes.
+* **Icosahedron** *(lower-right)*: A subdivided wireframe icosahedron provides a lower-right depth anchor.
+* **Octahedron** *(upper-left)*: A crystal-like wireframe octahedron accents the upper-left viewport corner.
+* **Dodecahedron** *(lower-left)*: A pentagonal wireframe dodecahedron adds geometric variety in the lower-left region.
+
+### Interactivity
+* **Mouse Parallax**: Moving the cursor across the hero smoothly lerps the entire particle field and geometry group in 3D space, giving a convincing depth-of-field parallax illusion.
+* **Click Burst**: Clicking anywhere on the hero unprojected NDC → world-space coordinates and spawns two concentric torus rings that expand outward with an additive-blend glow and fade — a ripple effect in 3D.
+* **Theme Sync**: The scene reacts in real-time to dark/light mode toggles — particle colours, geometry colours, and opacity values all update instantly.
+
+### Performance
+* `pointer-events: none` on the canvas ensures all hero CTAs and links remain fully interactive.
+* The render loop is paused via `IntersectionObserver` when the hero section scrolls off-screen.
+* The canvas is not initialised at all on mobile (`max-width: 768px`), saving GPU resources entirely.
+* `powerPreference: 'low-power'` is set on the WebGL context.
+* Pixel ratio is capped at `1.5×` to prevent excessive GPU load on HiDPI displays.
+* **Vite code-splitting**: Three.js is bundled into a separate lazy chunk (`three-vendor.js`), keeping the main app JS at **~8 kB gzip** while Three.js loads in parallel at **~129 kB gzip**.
 
 ## ⚡ Local Development
 
