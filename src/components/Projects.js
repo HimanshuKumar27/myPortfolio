@@ -19,7 +19,8 @@ export function renderProjects(containerId) {
           </span>`;
 
     return `
-      <div class="reveal card flex flex-col justify-between text-left">
+      <div class="reveal card-glass spotlight-card flex flex-col justify-between text-left">
+        <div class="spotlight-card-glow"></div>
         <div>
           <h3 class="text-xl font-semibold mb-2 text-center md:text-left">${project.title}</h3>
           <p class="text-teal-800/90 dark:text-slate-300 mb-4">${project.description}</p>

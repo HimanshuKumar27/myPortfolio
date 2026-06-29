@@ -48,6 +48,16 @@ $$\text{Domain Data} \longrightarrow \text{UI Component Renderers} \longrightarr
 
 ---
 
+## ✨ Modern Redesign Features (UI/UX Pro Max & 21st.dev)
+
+The portfolio has been redesigned using premium design tokens and animations:
+* **Glassmorphism Panels (`.card-glass`)**: All component containers render as glassmorphic card elements with `backdrop-filter: blur(16px)`, low-opacity borders, and smooth zoom easing.
+* **Interactive Spotlight Cards (`.spotlight-card`)**: Integrated delegated cursor tracking (`initSpotlightHover`). Hovering over cards highlights them with a dynamic radial gradient trail centered exactly under the mouse pointer.
+* **Text Scramble Decode (`.scramble-text`)**: Hovering over section headings and the hero title triggers a custom symbol-scrambling decode effect that resolves smoothly.
+* **Hardware-Accelerated Floating Blobs (`.bg-blob`)**: Fluid, slow-moving blurred background radial gradient shapes float slowly across the viewport (`@keyframes float-blob`) on a background layer, maintaining high FPS and keeping performance clean.
+
+---
+
 ## ⚡ Local Development
 
 To run or build this project locally, ensure you have [Node.js](https://nodejs.org/) installed, and then run the following commands:

@@ -41,6 +41,13 @@
 <body
   class="bg-gradient-to-br from-teal-50 via-white to-teal-100/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-teal-800 dark:text-slate-200 font-sans selection:bg-teal-200 selection:text-teal-900 transition-colors duration-300">
 
+  <!-- Fixed Floating Background Blobs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="bg-blob bg-blob-1 -top-20 -left-20"></div>
+    <div class="bg-blob bg-blob-2 top-1/3 -right-40"></div>
+    <div class="bg-blob bg-blob-3 bottom-10 left-1/4"></div>
+  </div>
+
   <!-- Navbar -->
   <header class="header-fixed">
     <!-- Scroll Progress Bar -->
@@ -125,7 +132,7 @@
   <!-- About Section -->
   <section id="about" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2
-      class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
+      class="reveal scramble-text text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       About Me</h2>
     <p class="reveal text-lg leading-relaxed max-w-3xl mx-auto dark:text-slate-300">
       A Front-End Developer passionate about building responsive and user-friendly websites. I focus on web
@@ -139,7 +146,7 @@
   <!-- Skills Section -->
   <section id="skills" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2
-      class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
+      class="reveal scramble-text text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Skills</h2>
     <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
       <!-- Dynamically Rendered by src/components/Skills.js -->
@@ -149,7 +156,7 @@
   <!-- Tools and Technology Section -->
   <section id="tools" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2
-      class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
+      class="reveal scramble-text text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Tools & Technology</h2>
     <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
       <!-- Dynamically Rendered by src/components/Tools.js -->
@@ -159,7 +166,7 @@
   <!-- Projects Section -->
   <section id="projects" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2
-      class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
+      class="reveal scramble-text text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Projects</h2>
     <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Dynamically Rendered by src/components/Projects.js -->
@@ -169,7 +176,7 @@
   <!-- Certifications Section -->
   <section id="certifications" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2
-      class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
+      class="reveal scramble-text text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Certifications</h2>
     <div id="certifications-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
       <!-- Dynamically Rendered by src/components/Certifications.js -->
@@ -179,7 +186,7 @@
   <!-- Education Section -->
   <section id="education" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2
-      class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
+      class="reveal scramble-text text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 text-center border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Education</h2>
     <div id="education-container" class="space-y-6">
       <!-- Dynamically Rendered by src/components/Education.js -->
@@ -189,16 +196,18 @@
   <!-- Contact Section -->
   <section id="contact" class="container mx-auto py-20 px-6 text-center section-lazy">
     <h2
-      class="reveal text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
+      class="reveal scramble-text text-4xl font-display font-bold tracking-tight text-teal-950 dark:text-slate-100 mb-6 border-b-2 border-teal-500 dark:border-teal-600 pb-2 inline-block">
       Get in Touch</h2>
     <p class="mb-8 text-lg">Feel free to connect with me through the following:</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-      <div class="reveal card flex items-center space-x-3">
+      <div class="reveal card-glass spotlight-card flex items-center space-x-3">
+        <div class="spotlight-card-glow"></div>
         <img src="https://cdn.simpleicons.org/gmail" class="w-6 h-6" alt="Gmail" loading="lazy" width="24"
           height="24" />
         <a href="mailto:365himanshukumar@gmail.com" class="hover:underline">365himanshukumar@gmail.com</a>
       </div>
-      <div class="reveal card flex items-center space-x-3">
+      <div class="reveal card-glass spotlight-card flex items-center space-x-3">
+        <div class="spotlight-card-glow"></div>
         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-[#0A66C2]">
           <title>LinkedIn</title>
           <path
@@ -207,23 +216,27 @@
         <a href="https://www.linkedin.com/in/365himanshukumar/" target="_blank"
           class="hover:underline">365himanshukumar</a>
       </div>
-      <div class="reveal card flex items-center space-x-3">
+      <div class="reveal card-glass spotlight-card flex items-center space-x-3">
+        <div class="spotlight-card-glow"></div>
         <img src="https://cdn.simpleicons.org/whatsapp" class="w-6 h-6" alt="WhatsApp" loading="lazy" width="24"
           height="24" />
         <a href="tel:+917011121740" class="hover:underline">+91-7011121740</a>
       </div>
-      <div class="reveal card flex items-center space-x-3">
+      <div class="reveal card-glass spotlight-card flex items-center space-x-3">
+        <div class="spotlight-card-glow"></div>
         <img src="https://cdn.simpleicons.org/github" class="w-6 h-6 dark:invert" alt="GitHub" loading="lazy" width="24"
           height="24" />
         <a href="https://github.com/HimanshuKumar27" target="_blank" class="hover:underline">HimanshuKumar27</a>
       </div>
-      <div class="reveal card flex items-center space-x-3">
+      <div class="reveal card-glass spotlight-card flex items-center space-x-3">
+        <div class="spotlight-card-glow"></div>
         <img src="https://cdn.simpleicons.org/instagram" class="w-6 h-6" alt="Instagram" loading="lazy" width="24"
           height="24" />
         <a href="https://www.instagram.com/great_himanshu_27/" target="_blank"
           class="hover:underline">great_himanshu_27</a>
       </div>
-      <div class="reveal card flex items-center space-x-3">
+      <div class="reveal card-glass spotlight-card flex items-center space-x-3">
+        <div class="spotlight-card-glow"></div>
         <img src="https://cdn.simpleicons.org/x" class="w-6 h-6 dark:invert" alt="X (Twitter)" loading="lazy" width="24" height="24" />
         <a href="https://x.com/greathimanshu27" target="_blank" class="hover:underline">greathimanshu27</a>
       </div>
@@ -247,7 +260,7 @@
       </button>
       <!-- PDF Viewer: src set by JS on open for lazy loading -->
       <div class="flex-1 overflow-hidden">
-        <iframe id="resumeIframe" data-src="assets/Himanshu_Kumar_Resume.pdf" class="w-full h-full"
+        <iframe id="resumeIframe" data-src="/assets/Himanshu_Kumar_Resume.pdf" class="w-full h-full"
           frameborder="0"></iframe>
       </div>
     </div>

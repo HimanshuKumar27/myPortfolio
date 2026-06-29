@@ -22,7 +22,8 @@ export function renderTools(containerId) {
     }
 
     return `
-      <div class="reveal card flex flex-col items-center">
+      <div class="reveal card-glass spotlight-card flex flex-col items-center">
+        <div class="spotlight-card-glow"></div>
         ${iconHtml}
         <span class="mt-2 font-medium">${tool.name}</span>
       </div>

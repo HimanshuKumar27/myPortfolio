@@ -11,6 +11,8 @@ export class AnimationManager {
     this.initScrollProgress();
     this.initScrollReveal();
     this.initNavLogoFade();
+    this.initSpotlightHover();
+    this.initTextScramble();
   }
 
   initScrollProgress() {
@@ -58,5 +60,58 @@ export class AnimationManager {
     });
 
     logoObserver.observe(this.homeSection);
+  }
+
+  initSpotlightHover() {
+    // Spotlight cursor tracking using efficient event delegation
+    document.addEventListener('mousemove', (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
+      const card = e.target.closest('.spotlight-card');
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      }
+    });
+  }
+
+  initTextScramble() {
+    // Text scramble animation on hover (common in modern premium portfolios)
+    document.addEventListener('mouseover', (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
+      const el = e.target.closest('.scramble-text');
+      if (!el || el.dataset.scrambling === 'true') return;
+
+      el.dataset.scrambling = 'true';
+      const originalText = el.dataset.originalText || el.textContent;
+      if (!el.dataset.originalText) {
+        el.dataset.originalText = originalText;
+      }
+      
+      const chars = '!<>-_\\/[]{}—=+*^?#________';
+      let iteration = 0;
+      
+      const interval = setInterval(() => {
+        el.innerHTML = originalText
+          .split('')
+          .map((char, index) => {
+            if (char === ' ') return ' ';
+            if (index < iteration) {
+              return originalText[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join('');
+
+        if (iteration >= originalText.length) {
+          clearInterval(interval);
+          el.textContent = originalText;
+          delete el.dataset.scrambling;
+        }
+        iteration += 1 / 2.5; // Controls the speed of decoding
+      }, 25);
+    });
   }
 }

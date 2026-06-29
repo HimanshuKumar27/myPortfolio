@@ -37,7 +37,7 @@ export class ModalManager {
     if (!this.modal || !this.content) return;
 
     // Lazy load the PDF from data-src
-    if (this.iframe && !this.iframe.src && this.iframe.dataset.src) {
+    if (this.iframe && this.iframe.dataset.src && (!this.iframe.src || this.iframe.src === 'about:blank' || !this.iframe.src.includes(this.iframe.dataset.src))) {
       this.iframe.src = this.iframe.dataset.src;
     }
 

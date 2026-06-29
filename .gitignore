@@ -23,3 +23,7 @@ dist/
 # OS metadata files
 .DS_Store
 Thumbs.db
+
+# Local agent customization and skills
+.agents/
+

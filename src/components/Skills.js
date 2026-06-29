@@ -9,7 +9,8 @@ export function renderSkills(containerId) {
   if (!container) return;
 
   container.innerHTML = skills.map(skill => `
-    <div class="reveal card flex flex-col items-center">
+    <div class="reveal card-glass spotlight-card flex flex-col items-center">
+      <div class="spotlight-card-glow"></div>
       <i class="${skill.iconClass} text-5xl" aria-hidden="true"></i>
       <span class="mt-2 font-medium">${skill.name}</span>
     </div>

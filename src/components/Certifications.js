@@ -9,7 +9,8 @@ export function renderCertifications(containerId) {
   if (!container) return;
 
   container.innerHTML = certifications.map(cert => `
-    <div class="reveal card text-left">
+    <div class="reveal card-glass spotlight-card text-left">
+      <div class="spotlight-card-glow"></div>
       <div class="flex items-center mb-2 space-x-2">
         <i data-lucide="award" class="w-5 h-5 text-teal-600" aria-hidden="true"></i>
         <h3 class="text-xl font-semibold">${cert.title}</h3>
