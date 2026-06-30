@@ -1,6 +1,6 @@
 export const projects = [
   {
-    title: "LaunchShield 🛡️",
+    title: "LaunchShield",
     description: "A free, no-login website audit tool that scans any public URL and gives a clear health report in under 30 seconds. Checks Performance, SEO, Accessibility, Security, and Best Practices — each scored out of 100 — then uses Gemini AI to deliver prioritized, plain-English action items. Zero accounts or sign-ups required.",
     liveUrl: "https://launch-shield-web.vercel.app",
     githubUrl: "https://github.com/HimanshuKumar27/launch-shield"

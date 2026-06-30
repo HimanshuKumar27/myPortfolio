@@ -10,7 +10,7 @@ import { ThemeManager } from './core/theme.js';
 import { NavigationManager } from './core/navigation.js';
 import { AnimationManager } from './core/animations.js';
 import { ModalManager } from './core/modal.js';
-import { ThreeBgManager } from './core/three-bg.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Render all dynamic UI components
@@ -58,11 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 7. Initialize Three.js interactive 3D background (desktop only)
-  new ThreeBgManager({
-    canvasId: 'hero-3d-bg',
-    heroSectionId: 'home',
-  });
+
 
   // 8. Initialize Typing Effect (Typed.js)
   if (window.Typed && document.querySelector('.typed-text')) {
