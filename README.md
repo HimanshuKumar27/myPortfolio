@@ -18,7 +18,7 @@ Portfolio/
 │   └── favicon.svg
 ├── src/
 │   ├── data/                         # Domain Data Layer (Pure content modules)
-│   │   ├── projects.js
+│   │   ├── projects.js               # Project entries with screenshot URLs
 │   │   ├── skills.js
 │   │   └── ...
 │   ├── core/                         # Core Services Layer (Behavior & State managers)
@@ -28,7 +28,7 @@ Portfolio/
 │   │   ├── animations.js             # Scroll reveal, spotlight hover & text scramble
 │   │   └── icons.js                  # Lucide icon manager
 │   ├── components/                   # UI Presentation Layer (Component renderers)
-│   │   ├── Projects.js
+│   │   ├── Projects.js               # Renders project cards with screenshot previews
 │   │   ├── Skills.js
 │   │   └── ...
 │   ├── styles/                       # CSS Preprocessors
@@ -59,6 +59,8 @@ The portfolio uses premium design tokens and micro-animations for a polished exp
 * **Hardware-Accelerated Floating Blobs (`.bg-blob`)**: Slow-moving blurred radial gradient shapes float across the viewport (`@keyframes float-blob`), keeping performance clean at high FPS.
 * **Scroll Reveal Animations (`.reveal`)**: Elements animate into view as they enter the viewport via `IntersectionObserver`.
 * **Typed.js Hero Title**: An animated typing effect cycles through the hero heading.
+* **Project Screenshot Previews**: Each project card displays a live site screenshot at the top (via microlink.io), with a shimmer loading skeleton and a smooth zoom-on-hover effect.
+* **Circular Browser Tab Favicon**: A canvas-based script clips the profile photo into a perfect circle at runtime and injects it as the tab favicon.
 
 ---
 
