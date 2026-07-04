@@ -9,6 +9,24 @@ export function renderProjects(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
+  // IntersectionObserver: fires network request only when a card is
+  // 300 px away from entering the viewport — zero wasted requests on load.
+  const observeScreenshots = () => {
+    const imgs = container.querySelectorAll('img[data-src]');
+    if (!imgs.length) return;
+
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const img = entry.target;
+        img.src = img.dataset.src;
+        observer.unobserve(img);
+      });
+    }, { rootMargin: '300px 0px' });
+
+    imgs.forEach(img => io.observe(img));
+  };
+
   container.innerHTML = projects.map(project => {
     const liveDemoHtml = project.liveUrl
       ? `<a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer"
@@ -22,15 +40,18 @@ export function renderProjects(containerId) {
 
 
     // Screenshot block — shimmer while loading, fallback icon when unavailable
+    // Uses data-src (not src) so the browser fires zero network requests until
+    // the IntersectionObserver below brings the card near the viewport.
     const screenshotHtml = project.screenshot
       ? `<div class="project-screenshot-wrapper">
             <div class="project-screenshot-shimmer"></div>
             <a href="${project.liveUrl || project.githubUrl}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
               <img
-                src="${project.screenshot}"
+                data-src="${project.screenshot}"
                 alt="${project.title} screenshot"
                 class="project-screenshot-img"
-                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 onload="this.previousElementSibling.style.display='none'"
                 onerror="this.closest('.project-screenshot-wrapper').innerHTML='<div class=\'project-screenshot-fallback\'><svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'2\' y=\'3\' width=\'20\' height=\'14\' rx=\'2\'/><path d=\'M8 21h8M12 17v4\'/></svg><span>Preview Unavailable</span></div>'"
               />
@@ -66,4 +87,7 @@ export function renderProjects(containerId) {
       </div>
     `;
   }).join('');
+
+  // Wire up lazy-loader after innerHTML is set
+  observeScreenshots();
 }
