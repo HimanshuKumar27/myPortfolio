@@ -1,14 +1,14 @@
 export const projects = [
   {
-    title: "LaunchShield",
-    description: "A free, no-login website audit tool that scans any public URL and gives a clear health report in under 30 seconds. Checks Performance, SEO, Accessibility, Security, and Best Practices — each scored out of 100 — then uses Gemini AI to deliver prioritized, plain-English action items. Zero accounts or sign-ups required.",
-    liveUrl: "https://launch-shield-web.vercel.app",
-    githubUrl: "https://github.com/HimanshuKumar27/launch-shield",
-    screenshot: "https://api.microlink.io?url=https%3A%2F%2Flaunch-shield-web.vercel.app&screenshot=true&meta=false&embed=screenshot.url"
+    title: "WebScraper",
+    description: "It is a free, no-login website audit tool that scans any public URL and gives you a clear health report in under 30 seconds.",
+    liveUrl: "https://free-webscraper.vercel.app/",
+    githubUrl: "https://github.com/HimanshuKumar27/WebScraper",
+    screenshot: "https://api.microlink.io?url=https%3A%2F%2Ffree-webscraper.vercel.app%2F&screenshot=true&meta=false&embed=screenshot.url"
   },
   {
     title: "BigQuery Release Notes Hub",
-    description: "A premium web application built with Python Flask and Vanilla Web Technologies. It pulls the latest Google BigQuery release notes from the official RSS/Atom feed, parses combined daily updates into granular individual cards, and features a built-in X/Twitter Composer to preview, edit, and share updates securely.",
+    description: "A web application built with Python Flask and Vanilla Web Technologies. It pulls the latest Google BigQuery release notes from the official RSS/Atom feed, parses combined daily updates into granular individual cards, and features a built-in X/Twitter Composer to preview, edit, and share updates securely.",
     liveUrl: "https://bq-release-notes-hub.onrender.com/",
     githubUrl: "https://github.com/HimanshuKumar27/bq-release-notes-hub",
     screenshot: "https://api.microlink.io?url=https%3A%2F%2Fbq-release-notes-hub.onrender.com%2F&screenshot=true&meta=false&embed=screenshot.url"
