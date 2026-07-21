@@ -1,97 +1,85 @@
-# 🌐 Himanshu Kumar – Portfolio
+# 🌐 Himanshu Kumar – Developer Portfolio
 
-My personal portfolio website, built with **Vite**, **Tailwind CSS**, and **ES6 Modules**, following **Clean Architecture** principles for high modularity and scalability.
+Welcome to my personal developer portfolio website! Built with **HTML**, **Tailwind CSS**, **JavaScript (ES6+)**, and **Vite**.
 
 ---
 
-## 🎨 Architectural Design
+## 📁 Project Structure
 
-The project enforces a strict separation of concerns across four distinct layers:
-
-```
+```text
 Portfolio/
-├── public/                           # Static assets served at the root
-│   ├── assets/
-│   │   ├── profile_image.webp
-│   │   └── Himanshu_Kumar_Resume.pdf
+├── public/
+│   ├── assets/             # Resume, profile image, and static assets
 │   ├── favicon.ico
 │   └── favicon.svg
 ├── src/
-│   ├── data/                         # Domain Data Layer (Pure content modules)
-│   │   ├── projects.js               # Project entries with screenshot URLs
-│   │   ├── skills.js
-│   │   └── ...
-│   ├── core/                         # Core Services Layer (Behavior & State managers)
-│   │   ├── theme.js                  # Light/Dark mode controller
-│   │   ├── navigation.js             # Mobile menu & scroll spy
-│   │   ├── modal.js                  # ESC & lazy iframe PDF loader
-│   │   ├── animations.js             # Scroll reveal, spotlight hover & text scramble
-│   │   └── icons.js                  # Lucide icon manager
-│   ├── components/                   # UI Presentation Layer (Component renderers)
-│   │   ├── Projects.js               # Renders project cards with screenshot previews
-│   │   ├── Skills.js
-│   │   └── ...
-│   ├── styles/                       # CSS Preprocessors
-│   │   └── main.css                  # Tailwind & custom animations
-│   └── app.js                        # Bootstrapper entry point
-├── index.html                        # Main layout skeleton
-├── tailwind.config.js                # Tailwind preprocessor configuration
-└── vite.config.js                    # Vite bundler configuration
+│   ├── components/         # Component renderers (Projects, Skills, Education, etc.)
+│   ├── core/               # Theme, navigation, modal, and animation scripts
+│   ├── data/               # Content data files (projects, skills, certs)
+│   ├── styles/             # CSS & Tailwind styling
+│   └── app.js              # Application entry point
+├── index.html              # Main HTML page
+├── package.json            # Dependencies and npm scripts
+├── tailwind.config.js      # Tailwind CSS configuration
+├── vite.config.js          # Vite build configuration
+└── README.md
 ```
-
-### Unidirectional Dependency Flow
-$$\text{Domain Data} \longrightarrow \text{UI Component Renderers} \longrightarrow \text{App Bootstrapper (app.js)} \longleftarrow \text{Core Services}$$
-
-1. **Domain Data Layer (`src/data/`)**: Contains raw, structured data. Isolates copy changes from code updates.
-2. **Core Services Layer (`src/core/`)**: Event-driven and state-tracking managers. Handle DOM lifecycle events passively with no visual layout logic.
-3. **UI Components Layer (`src/components/`)**: Visual presentation functions. Read domain data and inject styled markup into skeleton placeholders.
-4. **App Bootstrapper (`src/app.js` & `index.html`)**: The mounting application entry point.
 
 ---
 
-## ✨ Design & UI Features
+## ✨ Features
 
-The portfolio uses premium design tokens and micro-animations for a polished experience:
-
-* **Glassmorphism Panels (`.card-glass`)**: All containers render as glassmorphic cards with `backdrop-filter: blur(16px)`, low-opacity borders, and smooth zoom easing.
-* **Interactive Spotlight Cards (`.spotlight-card`)**: Delegated cursor tracking (`initSpotlightHover`) highlights cards with a dynamic radial gradient trail centered under the mouse pointer.
-* **Text Scramble Decode (`.scramble-text`)**: Hovering over section headings triggers a custom symbol-scrambling decode animation that resolves smoothly.
-* **Hardware-Accelerated Floating Blobs (`.bg-blob`)**: Slow-moving blurred radial gradient shapes float across the viewport (`@keyframes float-blob`), keeping performance clean at high FPS.
-* **Scroll Reveal Animations (`.reveal`)**: Elements animate into view as they enter the viewport via `IntersectionObserver`.
-* **Typed.js Hero Title**: An animated typing effect cycles through the hero heading.
-* **Project Screenshot Previews**: Each project card displays a live site screenshot at the top (via microlink.io), with a shimmer loading skeleton and a smooth zoom-on-hover effect.
-* **Circular Browser Tab Favicon**: A canvas-based script clips the profile photo into a perfect circle at runtime and injects it as the tab favicon.
+* **Responsive Layout**: Optimized for mobile, tablet, and desktop screens.
+* **Light / Dark Mode**: Theme toggle with preference persistence.
+* **Projects Showcase**: Interactive project cards with live site previews and GitHub links.
+* **Skills & Tools**: Grid display of developer skills and tech stack.
+* **Resume Viewer**: Integrated modal to view resume.
+* **Smooth Animations**: Dynamic typing effect, scroll progress indicator, and reveal effects.
 
 ---
 
-## ⚡ Local Development
+## 🛠️ Tech Stack
 
-Ensure [Node.js](https://nodejs.org/) is installed, then:
-
-### 1. Install dependencies
-```bash
-npm install
-```
-
-### 2. Start the local development server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to view the app with Hot Module Replacement (HMR).
-
-### 3. Build for production
-```bash
-npm run build
-```
-Vite compiles and packages assets into an optimized `/dist` folder. Production CSS is purged to only include actively rendered styles.
+* **Frontend**: HTML5, Vanilla JavaScript (ES6+ Modules)
+* **Styling**: Tailwind CSS
+* **Build Tool**: Vite
+* **Libraries**: Lucide Icons, Typed.js
 
 ---
 
-## 🚀 Deployment
+## 🚀 Getting Started
 
-Configured for seamless deployment on **Vercel** or **Netlify**:
+### Prerequisites
 
-* **Framework Preset**: `Vite`
-* **Build Command**: `npm run build`
-* **Output Directory**: `dist`
-* **Auto-deploy**: Pushing to `main` triggers an automatic production build.
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+
+### Setup Instructions
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/HimanshuKumar27/Portfolio.git
+   cd Portfolio
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📝 Contact & Socials
+
+* **GitHub**: [@HimanshuKumar27](https://github.com/HimanshuKumar27)
+* **LinkedIn**: [365himanshukumar](https://www.linkedin.com/in/365himanshukumar/)
+* **Email**: 365himanshukumar@gmail.com

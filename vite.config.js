@@ -8,14 +8,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    assetsDir: 'assets-compiled', // compiles JS/CSS into assets-compiled to avoid conflict with public/assets
-    chunkSizeWarningLimit: 600,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'three-vendor': ['three'], // Three.js split into its own lazy chunk
-        }
-      }
-    }
+    assetsDir: 'assets-compiled',
+    chunkSizeWarningLimit: 600
   }
 });
