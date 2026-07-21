@@ -1,5 +1,12 @@
 export const projects = [
   {
+    title: "PizzaByte",
+    description: "A full-stack pizza ordering & inventory management platform featuring a 4-step custom pizza builder, real-time order tracking, Razorpay integration, and automated low-stock email alerts.",
+    liveUrl: "https://pizzabyte-pizza-delivery-platform.vercel.app/",
+    githubUrl: "https://github.com/HimanshuKumar27/PizzaByte",
+    screenshot: "https://api.microlink.io?url=https%3A%2F%2Fpizzabyte-pizza-delivery-platform.vercel.app%2F&screenshot=true&meta=false&embed=screenshot.url"
+  },
+  {
     title: "WebScraper",
     description: "It is a free, no-login website audit tool that scans any public URL and gives you a clear health report in under 30 seconds.",
     liveUrl: "https://free-webscraper.vercel.app/",
