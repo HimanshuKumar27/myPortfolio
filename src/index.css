@@ -1,5 +1,52 @@
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
+@import "devicon/devicon.min.css";
+
+@layer base {
+  :root {
+    --background: 168 80% 98%;
+    --foreground: 175 70% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 175 70% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 175 70% 20%;
+    --primary: 173 80% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 168 60% 92%;
+    --secondary-foreground: 175 70% 20%;
+    --muted: 168 40% 95%;
+    --muted-foreground: 175 30% 40%;
+    --accent: 168 60% 92%;
+    --accent-foreground: 175 70% 20%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 168 50% 88%;
+    --input: 168 50% 88%;
+    --ring: 173 80% 40%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 173 80% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 175 50% 20%;
+    --input: 175 50% 20%;
+    --ring: 173 80% 40%;
+  }
+}
 
 /* ===== Custom Layout & Visual Enhancements ===== */
 
@@ -91,7 +138,6 @@ html.dark .header-fixed {
   transform: translateY(0);
 }
 
-
 /* ===== Floating Background Blobs ===== */
 .bg-blob {
   position: absolute;
@@ -144,7 +190,7 @@ html.dark .bg-blob {
   }
 }
 
-/* ===== Custom Card component styles (Consolidated UI) ===== */
+/* ===== Custom Card component styles ===== */
 .card {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
@@ -173,7 +219,7 @@ html.dark .card:hover {
   box-shadow: 0 25px 50px -12px rgba(15, 63, 56, 0.4);
 }
 
-/* ===== Glassmorphism and Spotlight Card Effects (21st.dev inspired) ===== */
+/* ===== Glassmorphism and Spotlight Card Effects ===== */
 .card-glass {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(16px);
@@ -234,13 +280,11 @@ html.dark .spotlight-card-glow {
   );
 }
 
-/* Ensure children are above the spotlight glow layer */
 .spotlight-card > * {
   position: relative;
   z-index: 10;
 }
 
-/* ===== Content-visibility optimization for offscreen sections ===== */
 .section-lazy {
   content-visibility: auto;
   contain-intrinsic-size: 0 500px;
@@ -264,13 +308,6 @@ html.dark .spotlight-card-glow {
 
 html.dark .profile-img {
   border-color: #0d9488;
-}
-
-@media (min-width: 640px) {
-  .profile-img {
-    width: 12rem;
-    height: 12rem;
-  }
 }
 
 /* ===== Navbar logo crossfade details ===== */
@@ -323,22 +360,8 @@ html.dark .nav-logo-img img {
   border-color: #0d9488;
 }
 
-/* ===== Modal layout overlays ===== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  transition: opacity 0.3s;
-}
-
 /* ===== Project Card Screenshot Preview ===== */
 .project-card {
-  /* Remove vertical padding from card-glass so screenshot touches the top edge */
   padding: 0;
   overflow: hidden;
 }
@@ -361,7 +384,6 @@ html.dark .project-screenshot-wrapper {
   background: rgba(15, 23, 42, 0.6);
 }
 
-/* Shimmer skeleton shown while image loads */
 .project-screenshot-shimmer {
   position: absolute;
   inset: 0;
@@ -391,7 +413,6 @@ html.dark .project-screenshot-shimmer {
   100% { background-position: -200% 0; }
 }
 
-/* The actual screenshot image */
 .project-screenshot-img {
   position: absolute;
   inset: 0;
@@ -409,7 +430,6 @@ html.dark .project-screenshot-shimmer {
   filter: brightness(1.05);
 }
 
-/* Fallback state when no screenshot or image errors */
 .project-screenshot-fallback {
   position: absolute;
   inset: 0;
@@ -428,45 +448,3 @@ html.dark .project-screenshot-shimmer {
 html.dark .project-screenshot-fallback {
   color: rgba(45, 212, 191, 0.35);
 }
-
-/* "Live" badge in the top-right corner of the screenshot */
-.project-live-badge {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  z-index: 10;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  padding: 0.2rem 0.55rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  pointer-events: none;
-  text-transform: uppercase;
-}
-
-.project-live-dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
-  animation: live-pulse 2s infinite;
-  flex-shrink: 0;
-}
-
-@keyframes live-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
-  70%  { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-}
-
-@tailwind utilities;
-

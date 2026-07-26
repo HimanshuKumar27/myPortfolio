@@ -1,6 +1,6 @@
 # 🌐 Himanshu Kumar – Developer Portfolio
 
-Welcome to my personal developer portfolio website! Built with **HTML**, **Tailwind CSS**, **JavaScript (ES6+)**, and **Vite**.
+Welcome to my personal developer portfolio website! Built with **React 19**, **Shadcn/ui**, **Tailwind CSS v4**, and **Vite**.
 
 ---
 
@@ -9,19 +9,23 @@ Welcome to my personal developer portfolio website! Built with **HTML**, **Tailw
 ```text
 Portfolio/
 ├── public/
-│   ├── assets/             # Resume, profile image, and static assets
-│   ├── favicon.ico
-│   └── favicon.svg
+│   └── assets/             # Resume, profile image, and static assets
 ├── src/
-│   ├── components/         # Component renderers (Projects, Skills, Education, etc.)
-│   ├── core/               # Theme, navigation, modal, and animation scripts
-│   ├── data/               # Content data files (projects, skills, certs)
-│   ├── styles/             # CSS & Tailwind styling
-│   └── app.js              # Application entry point
-├── index.html              # Main HTML page
+│   ├── components/
+│   │   ├── layout/         # Navbar and Footer components
+│   │   ├── sections/       # Section components (Hero, About, Skills, Projects, etc.)
+│   │   └── ui/             # Shadcn UI primitives & custom UI components
+│   ├── data/               # Content data files (projects, skills, certs, education)
+│   ├── hooks/              # Custom React hooks (theme, scroll-reveal, scroll-progress, spotlight)
+│   ├── lib/                # Utility functions (cn helper for Tailwind)
+│   ├── App.jsx             # Root React application component
+│   ├── index.css           # Global Tailwind CSS v4 & custom styles
+│   └── main.jsx            # React entry point
+├── components.json         # Shadcn UI configuration
+├── jsconfig.json           # Path alias configuration (@ -> ./src)
+├── index.html              # Main HTML entry page
 ├── package.json            # Dependencies and npm scripts
-├── tailwind.config.js      # Tailwind CSS configuration
-├── vite.config.js          # Vite build configuration
+├── vite.config.js          # Vite build & plugin configuration
 └── README.md
 ```
 
@@ -29,21 +33,22 @@ Portfolio/
 
 ## ✨ Features
 
-* **Responsive Layout**: Optimized for mobile, tablet, and desktop screens.
-* **Light / Dark Mode**: Theme toggle with preference persistence.
-* **Projects Showcase**: Interactive project cards with live site previews and GitHub links.
-* **Skills & Tools**: Grid display of developer skills and tech stack.
-* **Resume Viewer**: Integrated modal to view resume.
-* **Smooth Animations**: Dynamic typing effect, scroll progress indicator, and reveal effects.
+* **React 19 & Shadcn/ui**: Built on modern component-driven architecture with accessible Shadcn primitives.
+* **Responsive Layout**: Fully optimized for mobile, tablet, and desktop screens with mobile drawer navigation.
+* **Light / Dark Mode**: Theme switcher with preference persistence and FOUC prevention.
+* **Projects Showcase**: Interactive project cards with lazy-loaded live site previews, fallback states, and GitHub links.
+* **Skills & Tools**: Grid display of developer skills and tech stack using Devicon and custom SVG/image icons.
+* **Resume Viewer**: Integrated modal to view resume lazy-loaded via iframe.
+* **Smooth Animations**: Animated typing effect in hero section, scroll progress bar, scroll reveal, spotlight cursor glow, and text-scramble heading effects.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Frontend**: HTML5, Vanilla JavaScript (ES6+ Modules)
-* **Styling**: Tailwind CSS
-* **Build Tool**: Vite
-* **Libraries**: Lucide Icons, Typed.js
+* **Frontend Framework**: React 19, React DOM
+* **UI Components & Styling**: Shadcn/ui, Tailwind CSS v4, Radix UI Primitives, Lucide React
+* **Build Tool**: Vite 6, `@tailwindcss/vite`
+* **Animations**: `react-type-animation`, Custom IntersectionObserver Hooks
 
 ---
 
