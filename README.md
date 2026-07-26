@@ -1,6 +1,6 @@
 # 🌐 Himanshu Kumar – Developer Portfolio
 
-Welcome to my personal developer portfolio website! Built with **React 19**, **Shadcn/ui**, **Tailwind CSS v4**, and **Vite**.
+Welcome to my personal developer portfolio website! Built with **React 19**, **Shadcn/ui**, **Tailwind CSS v4**, **Vite**, and **Hover.dev** interactive design patterns.
 
 ---
 
@@ -12,18 +12,18 @@ Portfolio/
 │   └── assets/             # Resume, profile image, and static assets
 ├── src/
 │   ├── components/
-│   │   ├── layout/         # Navbar and Footer components
-│   │   ├── sections/       # Section components (Hero, About, Skills, Projects, etc.)
-│   │   └── ui/             # Shadcn UI primitives & custom UI components
-│   ├── data/               # Content data files (projects, skills, certs, education)
+│   │   ├── layout/         # Slide Tabs Navbar and Footer components
+│   │   ├── sections/       # Hero, About, Skills, Tools, Projects, Certifications, Education, Contact
+│   │   └── ui/             # Shadcn primitives, Rounded Slide Button, SpotlightCard, ResumeDialog
+│   ├── data/               # Content data files (projects, skills, tools, certs, education)
 │   ├── hooks/              # Custom React hooks (theme, scroll-reveal, scroll-progress, spotlight)
 │   ├── lib/                # Utility functions (cn helper for Tailwind)
 │   ├── App.jsx             # Root React application component
-│   ├── index.css           # Global Tailwind CSS v4 & custom styles
+│   ├── index.css           # Global Tailwind CSS v4 & custom keyframes
 │   └── main.jsx            # React entry point
 ├── components.json         # Shadcn UI configuration
 ├── jsconfig.json           # Path alias configuration (@ -> ./src)
-├── index.html              # Main HTML entry page
+├── index.html              # Main HTML entry page with pre-paint theme script
 ├── package.json            # Dependencies and npm scripts
 ├── vite.config.js          # Vite build & plugin configuration
 └── README.md
@@ -31,24 +31,27 @@ Portfolio/
 
 ---
 
-## ✨ Features
+## ✨ Features & Component Design
 
 * **React 19 & Shadcn/ui**: Built on modern component-driven architecture with accessible Shadcn primitives.
-* **Responsive Layout**: Fully optimized for mobile, tablet, and desktop screens with mobile drawer navigation.
-* **Light / Dark Mode**: Theme switcher with preference persistence and FOUC prevention.
-* **Projects Showcase**: Interactive project cards with lazy-loaded live site previews, fallback states, and GitHub links.
-* **Skills & Tools**: Grid display of developer skills and tech stack using Devicon and custom SVG/image icons.
+* **Hover.dev Slide Tabs Navbar**: Desktop header navigation with an animated sliding cursor pill that tracks active scroll sections.
+* **Hover.dev Sticky Cards (Scroll)**: Education section featuring cascading stacked sticky cards that stack smoothly as you scroll.
+* **Hover.dev Swap Column Features**: Projects section showcasing scroll-driven alternating feature columns paired with live screenshot previews.
+* **Hover.dev Rounded Slide Buttons**: Interactive pill-shaped buttons with smooth sliding background fill overlays.
+* **Hero Section & Avatar Animation**: High-impact left-aligned typography layout with continuous zoom pulse avatar animation.
+* **Custom About Me Section**: Two-column bento layout featuring story & mindset spotlight cards, interest pills, and a featured quote highlight.
+* **Permanent Dark Theme**: Sleek dark aesthetic enabled by default with FOUC prevention.
 * **Resume Viewer**: Integrated modal to view resume lazy-loaded via iframe.
-* **Smooth Animations**: Animated typing effect in hero section, scroll progress bar, scroll reveal, spotlight cursor glow, and text-scramble heading effects.
 
 ---
 
 ## 🛠️ Tech Stack
 
 * **Frontend Framework**: React 19, React DOM
-* **UI Components & Styling**: Shadcn/ui, Tailwind CSS v4, Radix UI Primitives, Lucide React
+* **Styling & UI Systems**: Tailwind CSS v4, Shadcn/ui, Radix UI Primitives, Lucide React, SimpleIcons, Devicon
 * **Build Tool**: Vite 6, `@tailwindcss/vite`
-* **Animations**: `react-type-animation`, Custom IntersectionObserver Hooks
+* **Design Patterns**: Hover.dev Animated UI Patterns (Slide Tabs, Sticky Cards, Swap Column, Rounded Slide Buttons)
+* **Animations**: `react-type-animation`, CSS Keyframes, Custom IntersectionObserver Hooks
 
 ---
 
