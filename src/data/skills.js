@@ -1,7 +1,19 @@
 export const skills = [
   {
-    name: "Microsoft Office",
-    iconClass: "devicon-windows8-original colored"
+    name: "React",
+    iconClass: "devicon-react-original colored"
+  },
+  {
+    name: "Vite",
+    imageUrl: "https://cdn.simpleicons.org/vite"
+  },
+  {
+    name: "JavaScript",
+    iconClass: "devicon-javascript-plain colored"
+  },
+  {
+    name: "TailwindCSS",
+    iconClass: "devicon-tailwindcss-plain colored"
   },
   {
     name: "HTML",
@@ -16,15 +28,11 @@ export const skills = [
     iconClass: "devicon-sass-original colored"
   },
   {
-    name: "TailwindCSS",
-    iconClass: "devicon-tailwindcss-plain colored"
-  },
-  {
     name: "Bootstrap",
     iconClass: "devicon-bootstrap-plain colored"
   },
   {
-    name: "JavaScript",
-    iconClass: "devicon-javascript-plain colored"
+    name: "Microsoft Office",
+    iconClass: "devicon-windows8-original colored"
   }
 ];

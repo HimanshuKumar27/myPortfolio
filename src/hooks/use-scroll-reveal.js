@@ -5,6 +5,14 @@ export function useScrollReveal(dependency) {
     const revealElements = document.querySelectorAll('.reveal');
     if (revealElements.length === 0) return;
 
+    // Immediately activate elements already in the viewport
+    revealElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('active');
+      }
+    });
+
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach(entry => {
@@ -15,12 +23,16 @@ export function useScrollReveal(dependency) {
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.05,
+        rootMargin: '0px',
       }
     );
 
-    revealElements.forEach(el => observer.observe(el));
+    revealElements.forEach(el => {
+      if (!el.classList.contains('active')) {
+        observer.observe(el);
+      }
+    });
 
     return () => {
       observer.disconnect();

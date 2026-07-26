@@ -17,6 +17,8 @@ export function ToolsSection() {
             const imgClass =
               tool.name === 'Antigravity'
                 ? 'w-12 h-12 rounded-lg object-cover shadow-sm border border-teal-200/30'
+                : tool.name === 'GitHub' || tool.name === 'Vercel'
+                ? 'w-12 h-12 dark:invert'
                 : 'w-12 h-12';
 
             iconHtml = (

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark">
   <meta name="description"
     content="Himanshu Kumar - Front-End Developer Portfolio. Explore my skills, projects, and educational background.">
   <title>Himanshu Kumar | Portfolio</title>
@@ -25,14 +25,11 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
     rel="stylesheet">
 
-  <!-- Prevent FOUC: apply dark mode before paint -->
   <script>
-    if (localStorage.getItem('theme') === 'dark') {
+    (function () {
       document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+      localStorage.setItem('theme', 'dark');
+    })();
   </script>
 </head>
 

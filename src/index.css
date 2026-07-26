@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "devicon/devicon.min.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --background: 168 80% 98%;
@@ -54,9 +56,22 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes continuousZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.animate-continuous-zoom {
+  animation: continuousZoom 2.5s ease-in-out infinite;
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: linear-gradient(to bottom right, #f0fdfa, #ffffff, rgba(204, 251, 241, 0.5));
+  background: linear-gradient(135deg, #e6f4f1 0%, #f0fdfa 50%, #e0f2fe 100%);
   color: #115e59;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s, color 0.3s;
@@ -88,7 +103,7 @@ html.dark ::selection {
   position: fixed;
   width: 100%;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(230, 244, 241, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(153, 246, 228, 0.6);
@@ -192,7 +207,7 @@ html.dark .bg-blob {
 
 /* ===== Custom Card component styles ===== */
 .card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(240, 253, 250, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(204, 251, 241, 1);
@@ -221,10 +236,10 @@ html.dark .card:hover {
 
 /* ===== Glassmorphism and Spotlight Card Effects ===== */
 .card-glass {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(230, 244, 241, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(204, 251, 241, 0.7);
+  border: 1px solid rgba(153, 246, 228, 0.8);
   box-shadow: 0 10px 30px -10px rgba(15, 63, 56, 0.05);
   border-radius: 0.75rem;
   padding: 1.5rem;
@@ -286,8 +301,7 @@ html.dark .spotlight-card-glow {
 }
 
 .section-lazy {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 500px;
+  /* Clean layout height calculation for smooth scroll targets */
 }
 
 /* ===== Profile image layout & animation ===== */

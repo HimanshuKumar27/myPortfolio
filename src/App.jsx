@@ -22,7 +22,7 @@ export default function App() {
   useSpotlight();
 
   return (
-    <div className="bg-linear-to-br from-teal-50 via-white to-teal-100/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-teal-800 dark:text-slate-200 font-sans selection:bg-teal-200 selection:text-teal-900 transition-colors duration-300 min-h-screen">
+    <div className="bg-linear-to-br from-teal-50 via-emerald-50/60 to-teal-100/70 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-teal-900 dark:text-slate-200 font-sans selection:bg-teal-200 selection:text-teal-900 transition-colors duration-300 min-h-screen">
       <DynamicFavicon />
       <Navbar />
 

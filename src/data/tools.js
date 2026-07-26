@@ -1,8 +1,8 @@
 export const tools = [
   {
     name: "GitHub",
-    type: "devicon",
-    iconClass: "devicon-github-original colored"
+    type: "image",
+    imageUrl: "https://cdn.simpleicons.org/github"
   },
   {
     name: "Antigravity",
