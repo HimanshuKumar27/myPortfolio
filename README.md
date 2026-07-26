@@ -86,8 +86,6 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
 ---
 
-## 📝 Contact & Socials
-
-* **GitHub**: [@HimanshuKumar27](https://github.com/HimanshuKumar27)
-* **LinkedIn**: [365himanshukumar](https://www.linkedin.com/in/365himanshukumar/)
-* **Email**: 365himanshukumar@gmail.com
+<p align="center">
+  Built with ❤️ and passion by <b>Himanshu Kumar</b>.
+</p>
