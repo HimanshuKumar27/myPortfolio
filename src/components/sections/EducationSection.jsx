@@ -38,47 +38,47 @@ const getBadgeText = (degree) => {
 
 export function EducationSection() {
   return (
-    <section id="education" className="container mx-auto py-20 px-6 text-center">
+    <section id="education" className="container mx-auto py-16 sm:py-20 px-4 sm:px-6 text-center">
       <SectionHeading>Education</SectionHeading>
-      <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-12 text-lg">
+      <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-10 sm:mb-12 text-base sm:text-lg">
         My academic journey and qualifications in computer science and web technologies.
       </p>
 
       {/* Sticky Stacking Cards Container (Hover.dev style) */}
-      <div className="relative max-w-4xl mx-auto space-y-8 pb-12">
+      <div className="relative max-w-4xl mx-auto space-y-6 sm:space-y-8 pb-12">
         {education.map((edu, index) => {
           const IconComponent = iconsMap[index % iconsMap.length];
           const gradientStyle = accentGradients[index % accentGradients.length];
           const badgeStyle = badgeColors[index % badgeColors.length];
-          const stickyTopOffset = 90 + index * 24;
+          const stickyTopOffset = 80 + index * 20;
 
           return (
             <div
               key={edu.degree}
               style={{ top: `${stickyTopOffset}px` }}
-              className={`sticky rounded-2xl border bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-8 sm:p-10 shadow-2xl transition-all duration-300 transform origin-top bg-linear-to-br ${gradientStyle}`}
+              className={`sticky rounded-2xl border bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-6 sm:p-8 lg:p-10 shadow-2xl transition-all duration-300 transform origin-top bg-linear-to-br ${gradientStyle}`}
             >
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-left">
-                <div className="space-y-3 flex-1">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 text-left">
+                <div className="space-y-2.5 sm:space-y-3 flex-1">
                   {/* Category / Institution Badge */}
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold border ${badgeStyle}`}>
-                      <IconComponent className="w-4.5 h-4.5" />
+                  <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                    <span className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold border ${badgeStyle}`}>
+                      <IconComponent className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                       {getBadgeText(edu.degree)}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 font-medium">
-                      <MapPin className="w-4 h-4 text-teal-500" />
+                    <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
+                      <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-500" />
                       {edu.location}
                     </span>
                   </div>
 
                   {/* Degree Title */}
-                  <h3 className="text-2xl sm:text-3xl font-bold font-display text-teal-950 dark:text-slate-100 leading-snug">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-display text-teal-950 dark:text-slate-100 leading-snug">
                     {edu.degree}
                   </h3>
 
                   {/* Institution Details */}
-                  <p className="text-base sm:text-lg font-medium text-teal-700 dark:text-teal-300 flex items-center gap-2">
+                  <p className="text-sm sm:text-base lg:text-lg font-medium text-teal-700 dark:text-teal-300 flex items-center gap-2">
                     <BuildingIcon className="w-4 h-4 text-teal-500 shrink-0" />
                     {edu.institution}
                   </p>
