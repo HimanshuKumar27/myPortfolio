@@ -1,4 +1,4 @@
-# 🌐 Himanshu Kumar – Developer Portfolio
+# 👨‍💻 Himanshu Kumar – Developer Portfolio
 
 Welcome to my personal developer portfolio website! Built with **React 19**, **Shadcn/ui**, **Tailwind CSS v4**, **Vite**, and **Hover.dev** interactive design patterns.
 

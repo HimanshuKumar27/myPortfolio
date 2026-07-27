@@ -50,7 +50,16 @@
   }
 }
 
-/* ===== Custom Layout & Visual Enhancements ===== */
+/* Anti-Extension & Force Dark Mode Protection */
+:root, html {
+  color-scheme: dark !important;
+  forced-color-adjust: none !important;
+}
+
+html[data-darkreader-scheme],
+html.darkreader {
+  filter: none !important;
+}
 
 html {
   scroll-behavior: smooth;
