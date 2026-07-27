@@ -9,6 +9,9 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const isClickScrollingRef = useRef(false);
+  const clickTimerRef = useRef(null);
+
   const navItems = [
     { label: 'Home', href: '#home', id: 'home' },
     { label: 'About', href: '#about', id: 'about' },
@@ -19,6 +22,30 @@ export function Navbar() {
     { label: 'Education', href: '#education', id: 'education' },
     { label: 'Contact', href: '#contact', id: 'contact' },
   ];
+
+  const scrollToSection = (id) => {
+    isClickScrollingRef.current = true;
+    if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+
+    setActiveSection(id);
+
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }
+
+    clickTimerRef.current = setTimeout(() => {
+      isClickScrollingRef.current = false;
+    }, 900);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +65,9 @@ export function Navbar() {
     const sectionIds = ['home', 'about', 'skills', 'tools', 'projects', 'certifications', 'education', 'contact'];
 
     const handleScrollTracking = () => {
+      // Ignore scroll tracking during programmatic click smooth scroll
+      if (isClickScrollingRef.current) return;
+
       // If user is near top of page, highlight home
       if (window.scrollY < 100) {
         setActiveSection('home');
@@ -50,7 +80,7 @@ export function Navbar() {
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const section = document.getElementById(sectionIds[i]);
         if (section) {
-          const sectionTop = section.offsetTop;
+          const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
           if (scrollPosition >= sectionTop) {
             setActiveSection(sectionIds[i]);
             break;
@@ -76,8 +106,7 @@ export function Navbar() {
           href="#home"
           onClick={(e) => {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setActiveSection('home');
+            scrollToSection('home');
           }}
           className={`nav-logo ${isScrolled ? 'scrolled' : ''}`}
           aria-label="Home"
@@ -97,7 +126,7 @@ export function Navbar() {
         </a>
 
         {/* Hover.dev Slide Tabs (Desktop Navigation) */}
-        <SlideTabs navItems={navItems} activeSection={activeSection} setActiveSection={setActiveSection} />
+        <SlideTabs navItems={navItems} activeSection={activeSection} onSelectTab={scrollToSection} />
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
@@ -114,33 +143,23 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown (Center Aligned) */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-teal-200/60 dark:border-teal-800/60 transition-all duration-300">
-          <ul className="flex flex-col space-y-4 px-6 py-6 text-xl nav-links">
+        <div className="md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-teal-200/60 dark:border-teal-800/60 transition-all duration-300 text-center">
+          <ul className="flex flex-col items-center justify-center space-y-5 px-6 py-8 text-xl nav-links">
             {navItems.map((item) => (
-              <li key={item.href}>
+              <li key={item.href} className="w-full text-center">
                 <a
                   href={item.href}
                   onClick={(e) => {
                     e.preventDefault();
                     setMobileMenuOpen(false);
-                    if (item.id === 'home') {
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                      setActiveSection('home');
-                      return;
-                    }
-                    const el = document.getElementById(item.id);
-                    if (el) {
-                      const offset = el.getBoundingClientRect().top + window.pageYOffset - 80;
-                      window.scrollTo({ top: offset, behavior: 'smooth' });
-                      setActiveSection(item.id);
-                    }
+                    scrollToSection(item.id);
                   }}
-                  className={`block transition-colors hover:text-teal-600 dark:hover:text-teal-400 ${
+                  className={`inline-block text-center transition-all duration-200 hover:text-teal-600 dark:hover:text-teal-400 hover:scale-105 ${
                     activeSection === item.id
-                      ? 'text-teal-600 dark:text-teal-400 font-bold'
-                      : ''
+                      ? 'text-teal-600 dark:text-teal-400 font-bold scale-105'
+                      : 'text-slate-700 dark:text-slate-200'
                   }`}
                 >
                   {item.label}
@@ -155,7 +174,7 @@ export function Navbar() {
 }
 
 {/* Hover.dev SlideTabs Component */}
-function SlideTabs({ navItems, activeSection, setActiveSection }) {
+function SlideTabs({ navItems, activeSection, onSelectTab }) {
   const [position, setPosition] = useState({
     left: 0,
     width: 0,
@@ -192,7 +211,7 @@ function SlideTabs({ navItems, activeSection, setActiveSection }) {
             item={item}
             isActive={isActive}
             setPosition={setPosition}
-            setActiveSection={setActiveSection}
+            onSelectTab={onSelectTab}
             ref={(el) => (tabRefs.current[item.id] = el)}
           />
         );
@@ -204,23 +223,10 @@ function SlideTabs({ navItems, activeSection, setActiveSection }) {
   );
 }
 
-const Tab = React.forwardRef(({ item, isActive, setPosition, setActiveSection }, ref) => {
+const Tab = React.forwardRef(({ item, isActive, setPosition, onSelectTab }, ref) => {
   const handleScroll = (e) => {
     e.preventDefault();
-    if (item.id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveSection('home');
-      return;
-    }
-    const el = document.getElementById(item.id);
-    if (el) {
-      const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-      setActiveSection(item.id);
-    }
+    onSelectTab(item.id);
   };
 
   return (

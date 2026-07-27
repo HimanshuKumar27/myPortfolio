@@ -18,7 +18,7 @@ export function HeroSection({ onOpenResume }) {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-28 sm:pt-32 pb-16 px-4 sm:px-6 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 relative overflow-hidden">
       {/* Fixed Floating Background Blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="bg-blob bg-blob-1 -top-20 -left-20" />
@@ -26,17 +26,17 @@ export function HeroSection({ onOpenResume }) {
         <div className="bg-blob bg-blob-3 bottom-10 left-1/4" />
       </div>
 
-      <div className="container mx-auto max-w-6xl relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="container mx-auto max-w-6xl relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12 items-center text-center lg:text-left">
         {/* Left Text Column */}
-        <div className="lg:col-span-8 text-left">
+        <div className="lg:col-span-8 space-y-4 sm:space-y-6">
           {/* Main Giant Heading */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight text-teal-950 dark:text-slate-50 mb-4 leading-tight sm:leading-none">
+          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight text-teal-950 dark:text-slate-50 leading-tight sm:leading-none">
             Hi, I'm Himanshu Kumar
             <span className="text-teal-500 dark:text-teal-400 inline-block animate-pulse">.</span>
           </h1>
 
           {/* Subtitle with Typewriter Role */}
-          <h2 className="text-xl sm:text-3xl lg:text-4xl font-medium text-slate-700 dark:text-slate-300 mb-6">
+          <h2 className="text-lg xs:text-xl sm:text-3xl lg:text-4xl font-medium text-slate-700 dark:text-slate-300">
             A{' '}
             <TypeAnimation
               sequence={[
@@ -55,23 +55,23 @@ export function HeroSection({ onOpenResume }) {
           </h2>
 
           {/* Friendly Description Bio */}
-          <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed mb-8">
+          <p className="text-sm sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
             Focused on building responsive, modern, and user-friendly web applications. Passionate about clean architecture, performance, and continuous learning. Let's connect!
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap gap-4 items-center">
-            <RoundedSlideButton onClick={scrollToContact} variant="primary">
+          <div className="flex flex-wrap xs:flex-nowrap justify-center lg:justify-start gap-3 sm:gap-4 items-center pt-2">
+            <RoundedSlideButton onClick={scrollToContact} variant="primary" className="w-full sm:w-auto text-center justify-center">
               Contact me
             </RoundedSlideButton>
-            <RoundedSlideButton onClick={onOpenResume} variant="outline">
+            <RoundedSlideButton onClick={onOpenResume} variant="outline" className="w-full sm:w-auto text-center justify-center">
               View Resume
             </RoundedSlideButton>
           </div>
         </div>
 
         {/* Right Profile Image Column */}
-        <div className="lg:col-span-4 flex justify-center lg:justify-end">
+        <div className="lg:col-span-4 flex justify-center lg:justify-end mt-4 lg:mt-0">
           <div className="relative group">
             <div className="absolute -inset-1.5 bg-linear-to-r from-teal-500 to-emerald-500 rounded-full blur-xl opacity-50 animate-continuous-zoom" />
             <img
@@ -81,7 +81,7 @@ export function HeroSection({ onOpenResume }) {
               height="240"
               fetchPriority="high"
               decoding="async"
-              className="relative w-48 h-48 sm:w-60 sm:h-60 lg:w-64 lg:h-64 object-cover rounded-full border-4 border-teal-500/40 dark:border-teal-400/40 shadow-2xl animate-continuous-zoom"
+              className="relative w-40 h-40 xs:w-48 xs:h-48 sm:w-60 sm:h-60 lg:w-64 lg:h-64 object-cover rounded-full border-4 border-teal-500/40 dark:border-teal-400/40 shadow-2xl animate-continuous-zoom"
             />
           </div>
         </div>
