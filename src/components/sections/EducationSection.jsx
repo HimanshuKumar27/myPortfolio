@@ -50,7 +50,7 @@ export function EducationSection() {
           const IconComponent = iconsMap[index % iconsMap.length];
           const gradientStyle = accentGradients[index % accentGradients.length];
           const badgeStyle = badgeColors[index % badgeColors.length];
-          const stickyTopOffset = 80 + index * 20;
+          const stickyTopOffset = 100 + index * 28;
 
           return (
             <div
