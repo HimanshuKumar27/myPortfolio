@@ -20,27 +20,12 @@ export const projects = [
     githubUrl: "https://github.com/HimanshuKumar27/bq-release-notes-hub",
     screenshot: "https://api.microlink.io?url=https%3A%2F%2Fbq-release-notes-hub.onrender.com%2F&screenshot=true&meta=false&embed=screenshot.url"
   },
-
   {
     title: "BookMyRoom - Hotel Booking System",
     description: "A full-stack hotel booking web application for discovering and booking budget to premium hotel rooms across India. Built with vanilla HTML/CSS/JS, Tailwind CSS, Supabase, and deployed on Netlify.",
     liveUrl: "https://bookmyroomonline.netlify.app/",
     githubUrl: "https://github.com/HimanshuKumar27/BookMyRoom",
     screenshot: "https://api.microlink.io?url=https%3A%2F%2Fbookmyroomonline.netlify.app%2F&screenshot=true&meta=false&embed=screenshot.url"
-  },
-  {
-    title: "Job Application Form",
-    description: "A modern and responsive Job Application Form built using HTML, CSS, and JavaScript. This project demonstrates form design, client-side validation, and a smooth user experience.",
-    liveUrl: "https://himanshukumar27.github.io/Job-Application-Form/",
-    githubUrl: "https://github.com/HimanshuKumar27/Job-Application-Form",
-    screenshot: "https://api.microlink.io?url=https%3A%2F%2Fhimanshukumar27.github.io%2FJob-Application-Form%2F&screenshot=true&meta=false&embed=screenshot.url"
-  },
-  {
-    title: "Modern Image Gallery",
-    description: "A beautiful, responsive image gallery that displays random high-quality images from Pexels API. Features smooth animations, hover effects, and a mobile-first design approach.",
-    liveUrl: "https://himanshukumar27.github.io/Modern-Image-Gallery/",
-    githubUrl: "https://github.com/HimanshuKumar27/Modern-Image-Gallery",
-    screenshot: "https://api.microlink.io?url=https%3A%2F%2Fhimanshukumar27.github.io%2FModern-Image-Gallery%2F&screenshot=true&meta=false&embed=screenshot.url"
   },
   {
     title: "My-Anime-Watch-List",
